@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Personal Portfolio </title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        <script src="https://cdn.botpress.cloud/webchat/v2.4/inject.js"></script>
+    </head>
+
+    <body>
+
+    <div id ="Header">
+        <div class="container">
+            <nav>
+                <ul id="top-menu">
+                    <li><a href="#Header">Home</a></li>
+                    <li><a href="#About">About</a></li>
+                    <li><a href="#Skills">Skills</a></li>
+                    <li><a href="#Portfolio">Portfolio</a></li>
+                    <li><a href="#Contact">Contact</a></li>
+                </ul>
+
+            </nav>
+
+            <div class="introduction-text">
+                <p>Software Developer</p>
+                <h1>Hi, I'm <span>Zakariyyaa Davids</span></h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT ME -->
+    <div id="About">
+        <div class="container">
+            <div class="row">
+                <div class="about-col-1">
+<!--                    <img src="images/ZAC3..JPG">-->
+                </div>
+                <div class="about-col-2">
+                    <h1 class="sub-title">About Me</h1>
+                    <p>I am a passionate software developer dedicated to crafting innovative solutions that make a real, meaningful impact. Always eager to expand my skills and stay ahead of emerging technologies, I am committed to continuous learning and growth. My curiosity, adaptability, and problem-solving mindset drive me to contribute positively to any team or organization.Thank you for visiting my webpage, I look forward to the possibility of contributing to your team and making a difference together.</p>
+                    <div class="tab-titles">
+<!--                        <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>-->
+                        <p class="tab-links " onclick="opentab('experiance')">Experiance</p>
+                        <p class="tab-links "onclick="opentab('education')">Education</p>
+
+                    </div>
+<!--                    <div class="tab-contents active-tab" id="skills">-->
+<!--                        <ul>-->
+<!--                            <li><span>Adaptability</span><br></li>-->
+<!--                            <li><span>Conflict Resolution</span><br></li>-->
+<!--                            <li><span>Communication</span><br>Designing Web/App interfaces<br></li>-->
+<!--                            <li><span>Team collaboration</span><br>Working effectively with others<br></li>-->
+<!--                            <li><span>Growth Mindset</span><br>Embracing challenges and feedback as opportunities to improve<br></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+                    <div class="tab-contents" id="experiance">
+                        <ul>
+                            <li><span>School Assignments / Competitions</span><br>Group projects, presentations and hackathons.</li>
+                        </ul>
+                    </div>
+                    <div class="tab-contents" id="education">
+                        <ul>
+                            <li><span>2023-2024 </span><br>Software Developer WeThinkCode_</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-----------Skills---------------->
+    <div id="Skills">
+        <div class="container">
+            <h1 class="sub-title">Practical Skills</h1>
+            <div class="Skills-list">
+
+                <div><i class="fab fa-github"></i><h2>GitHub</h2></div>
+                <div><i class="fab fa-java" style="color:#f89820;"></i><h2>Java</h2></div>
+                <div><i class="fab fa-python" style="color:#306998;"></i><h2>Python</h2></div>
+                <div><i class="fab fa-html5"></i><h2>HTML</h2></div>
+                <div><i class="fab fa-css3-alt"></i><h2>CSS</h2></div>
+                <div><i class="fas fa-database"></i><h2>MySQL</h2></div>
+                <div><i class="fas fa-code"></i><h2>Rest APIs</h2></div>
+                <div><i class="fab fa-js" style="color:#f7df1e;"></i><h2>JavaScript</h2></div>
+                <div><i class="fas fa-cloud"></i><h2>AWS Services</h2></div>
+
+            </div>
+        </div>
+    </div>
+
+    <!------------------- portfolio --------------------->
+<div id="Portfolio">
+    <div class="container">
+        <h1 class="sub-title">My Work</h1>
+        <div class="work-list">
+            <div class="work">
+                <img src="https://framerusercontent.com/images/g0YTRh7uRHpbWQgSZz62bO050.png">
+                <div class="layer">
+                    <h3>AI Chat Bot</h3>
+                    <p>An AI chatbot that is a conversational tool that provides personalized information about me. It can answer questions, share details about interests, preferences, skills, or background, and engage in dynamic conversations based on my profile</p>
+                    <a href="#" id="open-chatbot"><i class="fas fa-robot" style="color: #306998;"></i> </a>
+                </div>
+            </div>
+
+            <div class="work">
+                <img src="images/github.jpg">
+                <div class="layer">
+                    <h3>Github User Activity</h3>
+                    <p>A Java, GitHub User Activity CLI is a command-line tool that fetches and displays a GitHub user's recent activity—such as commits, pull requests, issues, and stars</p>
+                    <a href = "https://github.com/Zakariyyaa023/GitHub_User_Activity" ><i class="fas fa-link" style="color: blue"></i></a>
+                </div>
+            </div>
+            <div id="work" >
+                <div class="work">
+                    <img src="https://thepythoncode.com/media/articles/alarm-clock-app-using-tkinter-in-python.jpg">
+                    <div class="layer">
+                        <h3>Alarm Program</h3>
+                        <p>This program allows you to set an alarm...</p>
+                        <a href = "https://github.com/Zakariyyaa023/alarm_clock" ><span style="font-size: 24px;">⏰</span></a>
+                    </div>
+                </div>
+             </div>
+        </div>
+        <a href="#" class="btn">See More</a>
+
+        <div class="container">
+            <button id="chatToggleBtn" class="floating-toggle-btn" title="Open Generator">
+                <i class="fas fa-desktop" title="UI Design" style="font-size: 24px; color: white;"></i>
+            </button>
+        </div>
+        <div id="generatorPopup" class="container hidden">
+            <header class="img-gen-header">
+                <div class="logo-wrapper">
+                    <h1 id = "heading-of-gen">UI Mockup Generator</h1>
+                </div>
+            </header>
+            <div class="main-content">
+                <form action="#" class="prompt-form">
+                    <div class="prompt-container">
+                        <textarea class="prompt-input" placeholder="Describe your imagination in detail..." spellcheck="false" autofocus required></textarea>
+                        <button type="button" class="prompt-btn" title="Get Random Prompt">
+                            <i class="fa-solid fa-dice"></i>
+                        </button>
+                    </div>
+                    <div class="prompt-actions">
+                        <div class="select-wrapper">
+                            <select class="custom-select" id="model-select" required>
+                                <option value="" selected disabled>Select Model</option>
+                                <option value="black-forest-labs/FLUX.1-schnell">FLUX.1-schnell</option>
+                            </select>
+                        </div>
+                        <div class="select-wrapper">
+                            <select class="custom-select" id="count-select" required>
+                                <option value="" selected disabled>Image Count</option>
+                                <option value="1">1 Image</option>
+                                <option value="2">2 Images</option>
+                                <option value="3">3 Images</option>
+                                <option value="4">4 Images</option>
+                            </select>
+                        </div>
+                        <div class="select-wrapper">
+                            <select class="custom-select" id="ratio-select" required>
+                                <option value="" selected disabled>Aspect Ratio</option>
+                                <option value="1/1">Square (1:1)</option>
+                                <option value="16/9">Landscape (16:9)</option>
+                                <option value="9/16">Portrait (9:16)</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="generate-btn">
+                            <i class="fa-solid fa-wand-sparkles"></i>
+                            Generate
+                        </button>
+                    </div>
+                </form>
+                <div class="gallery-grid"></div>
+            </div>
+        </div>
+
+        </div>
+    <!-------------------- CONTACT ------------------------------>
+    <div id="Contact" class="container">
+        <div class="row">
+            <div class="contact-left">
+                <h1 class="sub-title">Contact Me</h1>
+                <p><i class="fas fa-envelope"></i> zakariyyaadavids50@email.com</p>
+                <p><i class="fas fa-phone" style="font-size:24px;color:#4CAF50;"></i> (+27)78 741 7136</p>
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/zakariyyaa-davids-0873a5242/"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/Zakariyyaa023"><i class="fab fa-github"></i></a>
+                </div>
+                <a href="images/Zakariyyaa_Davids_CV" download class="btn btn2">Download Cv</a>
+            </div>
+            <div class="contact-right">
+                <form action="https://api.web3forms.com/submit" method="POST">
+                    <input type="hidden" name="access_key" value="f990edf1-ad3e-4ec7-ad7a-a827c95297a9">
+                    <input type="text" name="Name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="Message" rows="9" placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn btn2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+    <script src="Scripts.js"></script>
+    </body>
+</html>
