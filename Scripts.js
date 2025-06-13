@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   waitForBotpress();
 });
-const promptForm = document.querySelector(".prompt-form");
+const promptFormUI = document.querySelector(".prompt-form");
 const promptBtn = document.querySelector(".prompt-btn");
 const promptInput = document.querySelector(".prompt-input");
 const generateBtn = document.querySelector(".generate-btn");
@@ -87,25 +87,67 @@ const galleryGrid = document.querySelector(".gallery-grid");
 const modelSelect = document.getElementById("model-select");
 const countSelect = document.getElementById("count-select");
 const ratioSelect = document.getElementById("ratio-select");
-const API_KEY = ""; // Hugging Face API Key
+const textArea = document.getElementById("generatedCode");
+
 // Example prompts
 const examplePrompts = [
   "Mobile login screen with a clean white background, email and password fields, Google login button, and a 'Forgot password?' link at the bottom.",
   "Modern analytics dashboard with a sidebar, top navbar, dark theme, cards showing revenue, active users, and graphs.",
   "Product detail page for an online clothing store, with large product image, title, price, size selection, and an 'Add to cart' button.",
   "Minimal desktop chat app interface with contacts sidebar, chat bubbles, message input field, and profile avatar at the top.",
-  "Simple signup form UI with a full-width layout, fields for name, email, password, confirm password, and a large green signup button."
+  "Simple signup form UI with a full-width layout, fields for name, email, password, confirm password, and a large green signup button.",
+  "Responsive e-commerce homepage featuring a hero banner, featured products carousel, navigation bar, and a footer with social links.",
+  "Dark mode settings page with toggle switches for notifications, privacy, and language preferences, plus a save changes button.",
+  "Mobile food delivery app interface showing nearby restaurants list, filters for cuisine type, search bar, and cart icon with item count.",
+  "Clean portfolio website homepage with a grid of project thumbnails, header with logo and menu, and a footer with contact info.",
+  "Fitness tracker dashboard with weekly activity graphs, step count, calories burned, and a motivational quote widget.",
+  "Booking form UI for a travel website with date pickers, destination dropdown, number of travelers input, and a prominent search button.",
+  "Minimal music player UI with album art, play/pause button, progress bar, volume control, and playlist dropdown.",
+  "User profile page with circular avatar, editable bio section, follower/following counts, and a tabbed interface for posts and likes.",
+  "Mobile banking app dashboard showing account balances, recent transactions, transfer money button, and a quick pay feature.",
+  "Task management app UI with columns for To Do, In Progress, and Done tasks, drag-and-drop functionality, and a new task input field.",
+  "E-learning platform course page with video player, course outline sidebar, progress bar, and discussion section below the video.",
+  "Recipe app interface displaying list of recipes with images, filter by cuisine and difficulty, and a favorite toggle button on each item.",
+  "Minimal calendar app UI with month view, daily agenda list, add event button, and color-coded event categories.",
+  "News app homepage featuring top headlines carousel, category tabs, article cards with images, and a bottom navigation bar.",
+  "Customer support chat widget UI with message history, quick reply buttons, typing indicator, and agent profile info.",
+  "Travel itinerary planner with map integration, daily schedule list, add/remove activity buttons, and share itinerary feature.",
+  "Minimalistic weather app interface showing current conditions, hourly forecast scroll, and weekly forecast cards with icons.",
+  "Job application tracker dashboard with job cards, status labels (applied, interview, offer), and a search/filter panel.",
+  "Photo gallery UI with masonry layout, lightbox preview on click, upload button, and filter by date or tags.",
+  "Cryptocurrency portfolio dashboard with real-time price charts, portfolio value summary, and buy/sell action buttons.",
+  "Event ticket booking page with seat map selector, ticket quantity dropdown, total price display, and checkout button.",
+  "Social media feed UI with user posts, like/comment/share buttons, story highlights carousel, and a new post creation modal.",
+  "Simple newsletter signup popup with email input, checkbox for terms agreement, and a submit button with success confirmation.",
+  "Online bookstore homepage featuring bestseller carousel, search bar, categories sidebar, and user reviews section.",
+  "Healthcare appointment booking UI with doctor list, date/time picker, patient info form, and confirmation screen."
+];
+// using polinations.ai to check if the content that user gave is UI/UX related
+async function isValidUIPromptUiMock(prompt) {
+  const question = `Only answer with yes or no, is this a UI Design prompt or related to UI designs prompt = (${prompt})`;
 
-];
-const allowedUIKeywords = [
-  "screen", "form", "dashboard", "button", "login", "signup", "input", "card",
-  "navbar", "sidebar", "interface", "profile", "chart", "table", "modal",
-  "field", "auth", "ecommerce", "chat", "message", "calendar", "ui", "ux"
-];
-const isValidUIPrompt = (prompt) => {
-  const lowerPrompt = prompt.toLowerCase();
-  return allowedUIKeywords.some(keyword => lowerPrompt.includes(keyword));
-};
+  const encodedPrompt = encodeURIComponent(question);
+  const url = `https://text.pollinations.ai/prompt/${encodedPrompt}`;
+
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: { "Accept": "text/plain" }
+    });
+
+    if (!response.ok) throw new Error("Text generation failed");
+
+    const text = (await response.text()).toLowerCase();
+
+  
+    console.log("Pollinations response:", text);
+    const trimmedText = text.trim(); 
+    return trimmedText === "yes"
+  } catch (error) {
+    console.error("Error validating prompt:", error);
+    return false;
+  }
+}
 
 // Calculate width/height based on chosen ratio
 const getImageDimensions = (aspectRatio, baseSize = 512) => {
@@ -130,29 +172,26 @@ const updateImageCard = (index, imageUrl) => {
                   </a>
                 </div>`;
 };
-// Send requests to Hugging Face API to create images
-const generateImages = async (selectedModel, imageCount, aspectRatio, promptText) => {
-  const MODEL_URL = `https://api-inference.huggingface.co/models/${selectedModel}`;
+
+// Send requests to poli API to create images
+const generateImages = async (imageCount, aspectRatio, promptText) => {
   const { width, height } = getImageDimensions(aspectRatio);
   generateBtn.setAttribute("disabled", "true");
-  // Create an array of image generation promises
+
+  const encodedPrompt = encodeURIComponent(promptText);
+  const model ="flux"; // default to flux if none provided
+
+  const baseURL = `https://image.pollinations.ai/prompt`;
+
+  // Create an array of image generation tasks
   const imagePromises = Array.from({ length: imageCount }, async (_, i) => {
     try {
-      // Send request to the AI model API
-      const response = await fetch(MODEL_URL, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${API_KEY}`,
-          "Content-Type": "application/json",
-          "x-use-cache": "false",
-        },
-        body: JSON.stringify({
-          inputs: promptText,
-          parameters: { width, height },
-        }),
-      });
-      if (!response.ok) throw new Error((await response.json())?.error);
-      // Convert response to an image URL and update the image card
+      const seed = Math.floor(Math.random() * 1000000); 
+      const imageUrl = `${baseURL}/${encodedPrompt}?model=flux&width=${width}&height=${height}&nologo=true&private=true&enhance=true&safe=true&quality=2&steps=30&seed=${seed}`;
+
+      const response = await fetch(imageUrl);
+      if (!response.ok) throw new Error("Image generation failed");
+
       const blob = await response.blob();
       updateImageCard(i, URL.createObjectURL(blob));
     } catch (error) {
@@ -160,13 +199,67 @@ const generateImages = async (selectedModel, imageCount, aspectRatio, promptText
       const imgCard = document.getElementById(`img-card-${i}`);
       imgCard.classList.replace("loading", "error");
       imgCard.querySelector(".status-text").textContent = "Generation failed! Check console for more details.";
+
     }
   });
-  await Promise.allSettled(imagePromises);
-  generateBtn.removeAttribute("disabled");
+  
+
+  await Promise.all(imagePromises);
 };
+
+
+// sending requests to poli Api to give texts and code related
+const generateTextCode = async (promptText) => {
+  generateBtn.setAttribute("disabled", "true");
+  let i = 0;
+  let generatedText = "";
+
+  try {
+    const encodedPrompt = encodeURIComponent(promptText);
+    const baseURL = `https://text.pollinations.ai/prompt/${encodedPrompt}`;
+
+    const response = await fetch(baseURL, {
+      method: "GET",
+      headers: {
+        "Accept": "text/plain",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Text generation failed");
+    }
+
+    generatedText = await response.text();
+    console.log("Pollinations response:", generatedText);
+
+    const codeTextarea = document.getElementById("generatedCode");
+    if (codeTextarea) {
+      codeTextarea.value = ""; // Clear before typing
+
+      const typeInterval = setInterval(() => {
+        if (i < generatedText.length) {
+          codeTextarea.value += generatedText.charAt(i);
+          codeTextarea.scrollTop = codeTextarea.scrollHeight; // Auto-scroll
+          i++;
+        } else {
+          clearInterval(typeInterval);
+          generateBtn.removeAttribute("disabled");
+        }
+      }, 5);
+    }
+
+  } catch (error) {
+    console.error("Error generating text/code:", error);
+    const codeTextarea = document.getElementById("generatedCode");
+    if (codeTextarea) {
+      codeTextarea.value = "// Error generating code. See console.";
+    }
+  } 
+};
+
+
 // Create placeholder cards with loading spinners
-const createImageCards = (selectedModel, imageCount, aspectRatio, promptText) => {
+const createImageCards = ( imageCount, aspectRatio, promptText) => {
   galleryGrid.innerHTML = "";
   for (let i = 0; i < imageCount; i++) {
     galleryGrid.innerHTML += `
@@ -178,27 +271,28 @@ const createImageCards = (selectedModel, imageCount, aspectRatio, promptText) =>
         </div>
       </div>`;
   }
-  // Stagger animation
   document.querySelectorAll(".img-card").forEach((card, i) => {
     setTimeout(() => card.classList.add("animate-in"), 100 * i);
   });
-  generateImages(selectedModel, imageCount, aspectRatio, promptText); // Generate Images
+  generateImages(imageCount, aspectRatio, promptText);
+  generateTextCode(`Please provide a detailed explanation along with the code for what was done and ${promptText} do not ask me further just end the conversation politely`);
+  
 };
-// Handle form submission
+
+
 const handleFormSubmit = (e) => {
   e.preventDefault();
 
-  const selectedModel = modelSelect.value;
   const imageCount = parseInt(countSelect.value) || 1;
   const aspectRatio = ratioSelect.value || "1/1";
   const promptText = promptInput.value.trim();
 
-  if (!isValidUIPrompt(promptText)) {
+  if (!isValidUIPromptUiMock(promptText)) {
     alert("Only UI design prompts are allowed. Please describe a UI component or screen.");
     return;
   }
 
-  createImageCards(selectedModel, imageCount, aspectRatio, promptText);
+  createImageCards(imageCount, aspectRatio, promptText);
 };
 
 // Fill prompt input with random example (typing effect)
@@ -207,10 +301,8 @@ promptBtn.addEventListener("click", () => {
   let i = 0;
   promptInput.focus();
   promptInput.value = "";
-  // Disable the button during typing animation
   promptBtn.disabled = true;
   promptBtn.style.opacity = "0.5";
-  // Typing effect
   const typeInterval = setInterval(() => {
     if (i < prompt.length) {
       promptInput.value += prompt.charAt(i);
@@ -225,10 +317,20 @@ promptBtn.addEventListener("click", () => {
 document.addEventListener('DOMContentLoaded', () => {
   const toggleBtn = document.getElementById('chatToggleBtn');
   const popup = document.getElementById('generatorPopup');
+  const generateIcon = document.getElementById('open-generator-icon');
 
   toggleBtn.addEventListener('click', () => {
     popup.classList.toggle('hidden');
   });
+  generateIcon.addEventListener('click', () => {
+     event.preventDefault();
+    popup.classList.toggle('hidden');
+  });
 });
 
-promptForm.addEventListener("submit", handleFormSubmit);
+document.getElementById('popupCloseBtn').addEventListener('click', () => {
+  document.getElementById('generatorPopup').classList.add('hidden');
+  document.getElementById('open-generator-icon').classList.add('hidden');
+});
+
+promptFormUI.addEventListener("submit", handleFormSubmit);
