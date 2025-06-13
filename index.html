@@ -123,62 +123,85 @@
                     </div>
                 </div>
              </div>
+             <div id="work" >
+                <div class="work">
+                    <img src="images/a-picture-of-a-ai-that-is-using-a-designs-on-a-screen-the-back-ground-be-generatating.jpg" >
+                    <div class="layer">
+                        <h3>AI-Powered UI Design Generator</h3>
+                        <p>An AI tool that quickly creates user-friendly interface layouts and styles based on your needs.</p>
+                        <a href="#" id="open-generator-icon"><span class="fas fa-brain" style="color: blue"></span></a>
+
+                    </div>
+                </div>
+             </div>
         </div>
-        <a href="#" class="btn">See More</a>
+        <!-- <a href="#" class="btn">See More</a> -->
 
         <div class="container">
-            <button id="chatToggleBtn" class="floating-toggle-btn" title="Open Generator">
-                <i class="fas fa-desktop" title="UI Design" style="font-size: 24px; color: white;"></i>
-            </button>
-        </div>
+  <button id="chatToggleBtn" class="floating-toggle-btn" title="Open Generator">
+    <i class="fas fa-desktop" title="UI Design" style="font-size: 24px; color: white;"></i>
+  </button>
+</div>
         <div id="generatorPopup" class="container hidden">
-            <header class="img-gen-header">
-                <div class="logo-wrapper">
-                    <h1 id = "heading-of-gen">UI Mockup Generator</h1>
-                </div>
-            </header>
-            <div class="main-content">
-                <form action="#" class="prompt-form">
-                    <div class="prompt-container">
-                        <textarea class="prompt-input" placeholder="Describe your imagination in detail..." spellcheck="false" autofocus required></textarea>
-                        <button type="button" class="prompt-btn" title="Get Random Prompt">
-                            <i class="fa-solid fa-dice"></i>
-                        </button>
-                    </div>
-                    <div class="prompt-actions">
-                        <div class="select-wrapper">
-                            <select class="custom-select" id="model-select" required>
-                                <option value="" selected disabled>Select Model</option>
-                                <option value="black-forest-labs/FLUX.1-schnell">FLUX.1-schnell</option>
-                            </select>
-                        </div>
-                        <div class="select-wrapper">
-                            <select class="custom-select" id="count-select" required>
-                                <option value="" selected disabled>Image Count</option>
-                                <option value="1">1 Image</option>
-                                <option value="2">2 Images</option>
-                                <option value="3">3 Images</option>
-                                <option value="4">4 Images</option>
-                            </select>
-                        </div>
-                        <div class="select-wrapper">
-                            <select class="custom-select" id="ratio-select" required>
-                                <option value="" selected disabled>Aspect Ratio</option>
-                                <option value="1/1">Square (1:1)</option>
-                                <option value="16/9">Landscape (16:9)</option>
-                                <option value="9/16">Portrait (9:16)</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="generate-btn">
-                            <i class="fa-solid fa-wand-sparkles"></i>
-                            Generate
-                        </button>
-                    </div>
-                </form>
-                <div class="gallery-grid"></div>
-            </div>
+  <header class="img-gen-header">
+    <div class="logo-wrapper-and-close" style="display: flex; align-items: center; gap: 20px;">
+      <h1 id="heading-of-gen" class="active-tab" style="cursor: pointer;">UI Mockup Generator</h1>
+      <button id="popupCloseBtn" class="close-btn" title="Close Generator">&times;</button>
+    </div>
+  </header>
+
+  <!-- UI Mockup Generator content -->
+  <div class="main-content" id="uiMockGeneratorContent">
+    <form action="#" class="prompt-form">
+      <div class="prompt-container">
+        <textarea
+          class="prompt-input"
+          placeholder="Describe your imagination in detail..."
+          spellcheck="false"
+          autofocus
+          required
+        ></textarea>
+        <button type="button" class="prompt-btn" title="Get Random Prompt">
+          <i class="fa-solid fa-dice"></i>
+        </button>
+      </div>
+      <div class="prompt-actions">
+        <div class="select-wrapper">
+          <select class="custom-select" id="count-select" required>
+            <option value="" selected disabled>Image Count</option>
+            <option value="1">1 Image</option>
+            <option value="2">2 Images</option>
+          </select>
+        </div>
+        <div class="select-wrapper">
+          <select class="custom-select" id="ratio-select" required>
+            <option value="" selected disabled>Aspect Ratio</option>
+            <option value="1/1">Square (1:1)</option>
+            <option value="16/9">Landscape (16:9)</option>
+            <option value="9/16">Portrait (9:16)</option>
+          </select>
         </div>
 
+        <button type="submit" class="generate-btn">
+          <i class="fa-solid fa-wand-sparkles"></i>
+          Generate
+        </button>
+      </div>
+      <div class="gallery-grid"></div>
+      <div class="code-output-container">
+        <label
+          for="generatedCode"
+          style="color: white; font-weight: 600; margin-bottom: 8px; display: block;"
+          >Generated Code:</label
+        >
+        <textarea
+          id="generatedCode"
+          readonly
+          placeholder="Please be patient as it can take time to generate, generated code and explanation will appear here..."
+        ></textarea>
+      </div>
+    </form>
+  </div>
         </div>
     <!-------------------- CONTACT ------------------------------>
     <div id="Contact" class="container">
