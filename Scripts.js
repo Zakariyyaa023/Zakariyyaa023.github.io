@@ -248,8 +248,7 @@ const generateTextCode = async (promptText) => {
 
 
 // Create placeholder cards with loading spinners
-const createImageCards = ( imageCount, aspectRatio, promptText) => {
-
+const createImageCards = async (imageCount, aspectRatio, promptText) => {
   galleryGrid.innerHTML = "";
   for (let i = 0; i < imageCount; i++) {
     galleryGrid.innerHTML += `
@@ -264,26 +263,28 @@ const createImageCards = ( imageCount, aspectRatio, promptText) => {
   document.querySelectorAll(".img-card").forEach((card, i) => {
     setTimeout(() => card.classList.add("animate-in"), 100 * i);
   });
-  generateImages(imageCount, aspectRatio, promptText);
-  
-  
+
+  await generateImages(imageCount, aspectRatio, promptText);
 };
 
 
-const handleFormSubmit = (e) => {
+const handleFormSubmit = async (e) => {
   e.preventDefault();
 
   const imageCount = parseInt(countSelect.value) || 1;
   const aspectRatio = ratioSelect.value || "1/1";
   const promptText = promptInput.value.trim();
 
-  if (!isValidUIPromptUiMock(promptText)) {
+  const isValid = await isValidUIPromptUiMock(promptText);
+  if (!isValid) {
     alert("Only UI design prompts are allowed. Please describe a UI component or screen.");
     return;
   }
-  createImageCards(imageCount, aspectRatio, promptText);
-  generateTextCode(`Please provide a detailed explanation along with the code for what was done and ${promptText} do not ask me further just end the conversation politely`);
+
+  await createImageCards(imageCount, aspectRatio, promptText);
+  await generateTextCode(`Please provide a detailed explanation along with the code for what was done and ${promptText} do not ask me further just end the conversation politely`);
 };
+
 
 // Fill prompt input with random example (typing effect)
 promptBtn.addEventListener("click", () => {
@@ -325,33 +326,39 @@ document.getElementById('popupCloseBtn').addEventListener('click', () => {
 
 promptFormUI.addEventListener("submit", handleFormSubmit);
 
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-
 let lastRequestTime = 0;
 let isRequestInProgress = false;
 
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 async function rateLimitedFetch(url, options = {}) {
+  console.log("Waiting for previous request to finish...");
   while (isRequestInProgress) {
-    await delay(100);
+    await delay(1000);
   }
 
   const now = Date.now();
   const timeSinceLast = now - lastRequestTime;
-  const waitTime = 3000 - timeSinceLast;
+  const waitTime = 4000 - timeSinceLast;
 
   if (waitTime > 0) {
+    console.log(`Waiting ${waitTime} ms before next request`);
     await delay(waitTime);
   }
 
+  console.log("Starting request:", url);
   isRequestInProgress = true;
-  lastRequestTime = Date.now();
 
   try {
     const response = await fetch(url, options);
+    console.log("Request done:", url);
     return response;
   } finally {
+    lastRequestTime = Date.now();
     isRequestInProgress = false;
   }
 }
+
+
 
 
