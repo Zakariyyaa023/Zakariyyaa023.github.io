@@ -334,7 +334,7 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 async function rateLimitedFetch(url, options = {}) {
   console.log("Waiting for previous request to finish...");
   while (isRequestInProgress) {
-    await delay(1000);
+    await delay(3000);
   }
 
   const now = Date.now();
