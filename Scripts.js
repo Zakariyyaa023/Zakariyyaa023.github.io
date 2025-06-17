@@ -339,7 +339,7 @@ async function rateLimitedFetch(url, options = {}) {
 
   const now = Date.now();
   const timeSinceLast = now - lastRequestTime;
-  const waitTime = 4000 - timeSinceLast;
+  const waitTime = 7000 - timeSinceLast;
 
   if (waitTime > 0) {
     console.log(`Waiting ${waitTime} ms before next request`);
