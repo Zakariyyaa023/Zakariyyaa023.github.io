@@ -1,17 +1,16 @@
 
-function showTab(tabId, element) {
-  document.querySelectorAll('.tab-content').forEach(el => {
-    el.style.display = 'none';
-  });
+// function showTab(tabId, element) {
+//   document.querySelectorAll('.tab-content').forEach(el => {
+//   el.style.display = 'none';
+//   });
 
-  document.querySelectorAll('.toggle-tab').forEach(el => {
-    el.classList.remove('active');
-  });
+//   document.querySelectorAll('.toggle-tab').forEach(el => {
+//   el.classList.remove('active');
+//   });
 
-  // Show the selected tab
-  document.getElementById(tabId).style.display = 'block';
-  element.classList.add('active');
-}
+//   document.getElementById(tabId).style.display = 'block';
+//   element.classList.add('active');
+// }
 
 var tablinks = document.getElementsByClassName("tab-links");
 var tabcontents = document.getElementsByClassName("tab-contents");
@@ -175,6 +174,7 @@ const updateImageCard = (index, imageUrl) => {
 
 // Send requests to poli API to create images
 const generateImages = async (imageCount, aspectRatio, promptText) => {
+  await delay(4000);
   const { width, height } = getImageDimensions(aspectRatio);
   generateBtn.setAttribute("disabled", "true");
 
@@ -210,6 +210,7 @@ const generateImages = async (imageCount, aspectRatio, promptText) => {
 
 // sending requests to poli Api to give texts and code related
 const generateTextCode = async (promptText) => {
+  await delay(4000);
   generateBtn.setAttribute("disabled", "true");
   let i = 0;
   let generatedText = "";
@@ -260,6 +261,7 @@ const generateTextCode = async (promptText) => {
 
 // Create placeholder cards with loading spinners
 const createImageCards = ( imageCount, aspectRatio, promptText) => {
+
   galleryGrid.innerHTML = "";
   for (let i = 0; i < imageCount; i++) {
     galleryGrid.innerHTML += `
@@ -291,7 +293,6 @@ const handleFormSubmit = (e) => {
     alert("Only UI design prompts are allowed. Please describe a UI component or screen.");
     return;
   }
-
   createImageCards(imageCount, aspectRatio, promptText);
 };
 
@@ -334,3 +335,4 @@ document.getElementById('popupCloseBtn').addEventListener('click', () => {
 });
 
 promptFormUI.addEventListener("submit", handleFormSubmit);
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
