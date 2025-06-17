@@ -123,8 +123,8 @@ const examplePrompts = [
 ];
 // using polinations.ai to check if the content that user gave is UI/UX related
 async function isValidUIPromptUiMock(prompt) {
+  
   const question = `Only answer with yes or no, is this a UI Design prompt or related to UI designs prompt = (${prompt})`;
-
   const encodedPrompt = encodeURIComponent(question);
   const url = `https://text.pollinations.ai/prompt/${encodedPrompt}`;
 
@@ -139,7 +139,7 @@ async function isValidUIPromptUiMock(prompt) {
     const text = (await response.text()).toLowerCase();
 
   
-    console.log("Pollinations response:", text);
+    await delay(4500);
     const trimmedText = text.trim(); 
     return trimmedText === "yes"
   } catch (error) {
@@ -174,7 +174,7 @@ const updateImageCard = (index, imageUrl) => {
 
 // Send requests to poli API to create images
 const generateImages = async (imageCount, aspectRatio, promptText) => {
-  await delay(4000);
+  await delay(4500);
   const { width, height } = getImageDimensions(aspectRatio);
   generateBtn.setAttribute("disabled", "true");
 
@@ -210,7 +210,7 @@ const generateImages = async (imageCount, aspectRatio, promptText) => {
 
 // sending requests to poli Api to give texts and code related
 const generateTextCode = async (promptText) => {
-  await delay(4000);
+  await delay(4500);
   generateBtn.setAttribute("disabled", "true");
   let i = 0;
   let generatedText = "";
@@ -261,7 +261,6 @@ const generateTextCode = async (promptText) => {
 
 // Create placeholder cards with loading spinners
 const createImageCards = ( imageCount, aspectRatio, promptText) => {
-
   galleryGrid.innerHTML = "";
   for (let i = 0; i < imageCount; i++) {
     galleryGrid.innerHTML += `
