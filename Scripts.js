@@ -173,24 +173,21 @@ const updateImageCard = (index, imageUrl) => {
 
 // Send requests to poli API to create images
 const generateImages = async (imageCount, aspectRatio, promptText) => {
-  
   const { width, height } = getImageDimensions(aspectRatio);
   generateBtn.setAttribute("disabled", "true");
 
   const encodedPrompt = encodeURIComponent(promptText);
-  const model ="flux"; // default to flux if none provided
-
+  const model = "flux"; // default to flux if none provided
   const baseURL = `https://image.pollinations.ai/prompt`;
 
-  // Create an array of image generation tasks
-  const imagePromises = Array.from({ length: imageCount }, async (_, i) => {
+  for (let i = 0; i < imageCount; i++) {
     try {
-      const seed = Math.floor(Math.random() * 1000000); 
+      const seed = Math.floor(Math.random() * 1000000);
       const imageUrl = `${baseURL}/${encodedPrompt}?model=flux&width=${width}&height=${height}&nologo=true&private=true&enhance=true&safe=true&quality=2&steps=30&seed=${seed}`;
 
       const response = await rateLimitedFetch(imageUrl);
       if (!response.ok) throw new Error("Image generation failed");
-      
+
       const blob = await response.blob();
       updateImageCard(i, URL.createObjectURL(blob));
     } catch (error) {
@@ -198,13 +195,10 @@ const generateImages = async (imageCount, aspectRatio, promptText) => {
       const imgCard = document.getElementById(`img-card-${i}`);
       imgCard.classList.replace("loading", "error");
       imgCard.querySelector(".status-text").textContent = "Generation failed! Check console for more details.";
-
     }
-  });
-  
-
-  await Promise.all(imagePromises);
+  }
 };
+
 
 
 // sending requests to poli Api to give texts and code related
@@ -218,7 +212,7 @@ const generateTextCode = async (promptText) => {
     const encodedPrompt = encodeURIComponent(promptText);
     const baseURL = `https://text.pollinations.ai/prompt/${encodedPrompt}`;
 
-    const response = await rateLimitedFetch(url, { method: "GET", headers: { "Accept": "text/plain" } });
+    const response = await rateLimitedFetch(baseURL, { method: "GET", headers: { "Accept": "text/plain" } });
 
     if (!response.ok) {
       throw new Error("Text generation failed");
@@ -271,7 +265,7 @@ const createImageCards = ( imageCount, aspectRatio, promptText) => {
     setTimeout(() => card.classList.add("animate-in"), 100 * i);
   });
   generateImages(imageCount, aspectRatio, promptText);
-  generateTextCode(`Please provide a detailed explanation along with the code for what was done and ${promptText} do not ask me further just end the conversation politely`);
+  
   
 };
 
@@ -288,6 +282,7 @@ const handleFormSubmit = (e) => {
     return;
   }
   createImageCards(imageCount, aspectRatio, promptText);
+  generateTextCode(`Please provide a detailed explanation along with the code for what was done and ${promptText} do not ask me further just end the conversation politely`);
 };
 
 // Fill prompt input with random example (typing effect)
