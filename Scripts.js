@@ -274,6 +274,7 @@ const handleFormSubmit = async (e) => {
   }
 
   await createImageCards(imageCount, aspectRatio, promptText);
+  await delay(4000);
   await generateTextCode(`Please provide a detailed explanation along with the code for what was done and ${promptText} do not ask me further just end the conversation politely`);
 };
 
