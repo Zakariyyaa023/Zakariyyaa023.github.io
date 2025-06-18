@@ -1,5 +1,8 @@
-export async function handler(event, context) {
-  const { prompt, width = 512, height = 512 } = event.queryStringParameters;
+const fetch = require("node-fetch");
+const Buffer = require("buffer").Buffer;
+
+exports.handler = async function(event, context) {
+  const { prompt, width = 512, height = 512 } = event.queryStringParameters || {};
 
   if (!prompt) {
     return {
@@ -25,7 +28,7 @@ export async function handler(event, context) {
       statusCode: 200,
       headers: {
         "Content-Type": contentType,
-        "Cache-Control": "no-cache"
+        "Cache-Control": "no-cache",
       },
       body: base64,
       isBase64Encoded: true,
@@ -36,4 +39,4 @@ export async function handler(event, context) {
       body: `Image proxy error: ${error.message}`,
     };
   }
-}
+};
