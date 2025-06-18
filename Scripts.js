@@ -194,8 +194,9 @@ const generateImages = async (imageCount, aspectRatio, promptText) => {
 
 // sending requests to poli Api to give texts and code related
 const generateTextCode = async (promptText) => {
-
+  
   generateBtn.setAttribute("disabled", "true");
+  await delay(4000);
   let i = 0;
   let generatedText = "";
 
@@ -316,3 +317,6 @@ document.getElementById('popupCloseBtn').addEventListener('click', () => {
 });
 
 promptFormUI.addEventListener("submit", handleFormSubmit);
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
