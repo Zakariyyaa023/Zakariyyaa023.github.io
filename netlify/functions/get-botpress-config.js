@@ -1,4 +1,4 @@
-export async function handler() {
+exports.handler = async function(event, context) {
   const clientId = process.env.BOTPRESS_CLIENT_ID;
   const botId = process.env.BOTPRESS_BOT_ID;
 
@@ -13,4 +13,4 @@ export async function handler() {
     statusCode: 200,
     body: JSON.stringify({ clientId, botId }),
   };
-}
+};
