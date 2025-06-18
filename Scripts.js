@@ -123,7 +123,7 @@ async function isValidUIPromptUiMock(prompt) {
   const question = `Only answer with yes or no, is this a UI Design prompt or related to UI designs prompt = (${prompt})`;
 
   const encodedPrompt = encodeURIComponent(question);
-  const url = `/.netlify/functions/pollinations?prompt=${encodedPrompt}`;
+  const url = `/.netlify/functions/pollinations-text?prompt=${encodedPrompt}`;
 
   try {
     const response = await fetch(url);
@@ -172,7 +172,7 @@ const generateImages = async (imageCount, aspectRatio, promptText) => {
   for (let i = 0; i < imageCount; i++) {
     try {
       const seed = Math.floor(Math.random() * 1000000);
-      const imageUrl = `/.netlify/functions/pollinationsImage?prompt=${encodedPrompt}&width=${width}&height=${height}`;
+      const imageUrl = `/.netlify/functions/pollinations-image?prompt=${encodedPrompt}&width=${width}&height=${height}`;
 
 
       const response = await fetch(imageUrl);
@@ -201,7 +201,7 @@ const generateTextCode = async (promptText) => {
 
   try {
     const encodedPrompt = encodeURIComponent(promptText);
-    const url = `/.netlify/functions/pollinations?prompt=${encodedPrompt}`;
+    const url = `/.netlify/functions/pollinations-text?prompt=${encodedPrompt}`;
 
      const response = await fetch(url);
 
