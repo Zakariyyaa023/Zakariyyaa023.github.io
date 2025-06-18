@@ -1,17 +1,4 @@
 
-// function showTab(tabId, element) {
-//   document.querySelectorAll('.tab-content').forEach(el => {
-//   el.style.display = 'none';
-//   });
-
-//   document.querySelectorAll('.toggle-tab').forEach(el => {
-//   el.classList.remove('active');
-//   });
-
-//   document.getElementById(tabId).style.display = 'block';
-//   element.classList.add('active');
-// }
-
 var tablinks = document.getElementsByClassName("tab-links");
 var tabcontents = document.getElementsByClassName("tab-contents");
 
@@ -50,34 +37,44 @@ window.addEventListener('scroll', () => {
 document.addEventListener("DOMContentLoaded", function () {
   const waitForBotpress = () => {
     if (window.botpress && window.botpress.init) {
-    document.getElementById("open-chatbot").addEventListener("click", function (e) {
-      e.preventDefault();
-      if (window.botpress && window.botpress.toggle) {
-        window.botpress.toggle();
-      }
-    });
-      window.botpress.init({
-        botId: "c5128946-89a5-4f55-841a-c9f988f781ed",
-        clientId: "7158fe27-8e4c-47e7-bf9b-fb5caa4dccc5",
-        configuration: {
-          botName: "Chatfolio",
-          botDescription: "Welcome! I'm a smart assistant here to help you learn more about Zakariyyaa",
-          fabImage: "https://files.bpcontent.cloud/2025/05/25/14/20250525145941-FA9G7G2O.jpeg",
-          color: "#3290d8",
-          variant: "solid",
-          themeMode: "dark",
-          fontFamily: "rubik",
-          radius: 4,
-          allowFileUpload: false
+      document.getElementById("open-chatbot").addEventListener("click", function (e) {
+        e.preventDefault();
+        if (window.botpress && window.botpress.toggle) {
+          window.botpress.toggle();
         }
       });
+
+      // Fetch clientId and botId from your Netlify function
+      fetch('/.netlify/functions/get-botpress-config')
+        .then(res => res.json())
+        .then(({ clientId, botId }) => {
+          window.botpress.init({
+            clientId,
+            botId,
+            configuration: {
+              botName: "Chatfolio",
+              botDescription: "Welcome! I'm a smart assistant here to help you learn more about Zakariyyaa",
+              fabImage: "https://files.bpcontent.cloud/2025/05/25/14/20250525145941-FA9G7G2O.jpeg",
+              color: "#3290d8",
+              variant: "solid",
+              themeMode: "dark",
+              fontFamily: "rubik",
+              radius: 4,
+              allowFileUpload: false
+            }
+          });
+        })
+        .catch(err => console.error("Failed to get botpress config:", err));
+
     } else {
+      // Retry after 100ms if botpress is not ready yet
       setTimeout(waitForBotpress, 100);
     }
   };
 
   waitForBotpress();
 });
+
 const promptFormUI = document.querySelector(".prompt-form");
 const promptBtn = document.querySelector(".prompt-btn");
 const promptInput = document.querySelector(".prompt-input");
@@ -126,24 +123,18 @@ async function isValidUIPromptUiMock(prompt) {
   const question = `Only answer with yes or no, is this a UI Design prompt or related to UI designs prompt = (${prompt})`;
 
   const encodedPrompt = encodeURIComponent(question);
-  const url = `https://text.pollinations.ai/prompt/${encodedPrompt}`;
+  const url = `/.netlify/functions/pollinations?prompt=${encodedPrompt}`;
 
   try {
-    
-    const response = await rateLimitedFetch(url, { method: "GET", headers: { "Accept": "text/plain" } });
-
-
+    const response = await fetch(url);
     if (!response.ok) throw new Error("Text generation failed");
-
-    const text = (await response.text()).toLowerCase();
-
-  
+    const text = (await response.text()).toLowerCase();  
     console.log("Pollinations response:", text);
     const trimmedText = text.trim(); 
     return trimmedText === "yes"
   } catch (error) {
-    console.error("Error validating prompt:", error);
-    return false;
+      console.error("Error validating prompt:", error);
+      return false;
   }
 }
 
@@ -177,19 +168,19 @@ const generateImages = async (imageCount, aspectRatio, promptText) => {
   generateBtn.setAttribute("disabled", "true");
 
   const encodedPrompt = encodeURIComponent(promptText);
-  const model = "flux"; // default to flux if none provided
-  const baseURL = `https://image.pollinations.ai/prompt`;
 
   for (let i = 0; i < imageCount; i++) {
     try {
       const seed = Math.floor(Math.random() * 1000000);
-      const imageUrl = `${baseURL}/${encodedPrompt}?model=flux&width=${width}&height=${height}&nologo=true&private=true&enhance=true&safe=true&quality=2&steps=30&seed=${seed}`;
+      const imageUrl = `/.netlify/functions/pollinationsImage?prompt=${encodedPrompt}&width=${width}&height=${height}`;
 
-      const response = await rateLimitedFetch(imageUrl);
+
+      const response = await fetch(imageUrl);
       if (!response.ok) throw new Error("Image generation failed");
 
       const blob = await response.blob();
       updateImageCard(i, URL.createObjectURL(blob));
+
     } catch (error) {
       console.error(error);
       const imgCard = document.getElementById(`img-card-${i}`);
@@ -210,9 +201,9 @@ const generateTextCode = async (promptText) => {
 
   try {
     const encodedPrompt = encodeURIComponent(promptText);
-    const baseURL = `https://text.pollinations.ai/prompt/${encodedPrompt}`;
+    const url = `/.netlify/functions/pollinations?prompt=${encodedPrompt}`;
 
-    const response = await rateLimitedFetch(baseURL, { method: "GET", headers: { "Accept": "text/plain" } });
+     const response = await fetch(url);
 
     if (!response.ok) {
       throw new Error("Text generation failed");
@@ -325,40 +316,3 @@ document.getElementById('popupCloseBtn').addEventListener('click', () => {
 });
 
 promptFormUI.addEventListener("submit", handleFormSubmit);
-
-let lastRequestTime = 0;
-let isRequestInProgress = false;
-
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-
-async function rateLimitedFetch(url, options = {}) {
-  console.log("Waiting for previous request to finish...");
-  while (isRequestInProgress) {
-    await delay(3000);
-  }
-
-  const now = Date.now();
-  const timeSinceLast = now - lastRequestTime;
-  const waitTime = 7000 - timeSinceLast;
-
-  if (waitTime > 0) {
-    console.log(`Waiting ${waitTime} ms before next request`);
-    await delay(waitTime);
-  }
-
-  console.log("Starting request:", url);
-  isRequestInProgress = true;
-
-  try {
-    const response = await fetch(url, options);
-    console.log("Request done:", url);
-    return response;
-  } finally {
-    lastRequestTime = Date.now();
-    isRequestInProgress = false;
-  }
-}
-
-
-
-
