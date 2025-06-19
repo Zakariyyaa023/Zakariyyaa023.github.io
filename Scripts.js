@@ -278,9 +278,15 @@ const handleFormSubmit = async (e) => {
   const promptText = promptInput.value.trim();
 
   // Use the scoring-based validator (synchronous function)
-  if (!isValidUIPromptUiMock(promptText)) {
+  const isValid = await isValidUIPromptUiMock(promptText);
+
+  if (!isValid) {
     alert("Only UI design prompts are allowed. Please describe a UI component or screen.");
     return;
+  }
+  if (!promptText) {
+  alert("Please enter a prompt.");
+  return;
   }
 
   // Proceed with generation
