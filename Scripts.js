@@ -119,23 +119,58 @@ const examplePrompts = [
   "Healthcare appointment booking UI with doctor list, date/time picker, patient info form, and confirmation screen."
 ];
 // using polinations.ai to check if the content that user gave is UI/UX related
-async function isValidUIPromptUiMock(prompt) {
-  const question = `Only answer with yes or no, is this a UI Design prompt or related to UI designs prompt = (${prompt})`;
+function isValidUIPromptUiMock(prompt) {
+  const uiKeywords = {
+    "login": 2,
+    "signup": 2,
+    "dashboard": 3,
+    "profile": 2,
+    "screen": 2,
+    "interface": 3,
+    "app": 2,
+    "button": 1,
+    "form": 2,
+    "input": 1,
+    "navbar": 1,
+    "card": 1,
+    "component": 2,
+    "widget": 2,
+    "design": 2,
+    "layout": 2,
+    "ux": 3,
+    "ui": 3,
+    "responsive": 2,
+    "modal": 1,
+    "page": 1,
+    "settings": 1,
+    "toggle": 1,
+    "theme": 1,
+    "avatar": 1,
+    "tab": 1,
+    "grid": 1,
+    "popup": 1,
+    "icon": 1,
+    "tooltip": 1,
+    "user": 1,
+    "chat": 1,
+    "calendar": 1,
+    "timeline": 1,
+    "feed": 1,
+    "search": 1,
+    "navigation": 1
+  };
 
-  const encodedPrompt = encodeURIComponent(question);
-  const url = `/.netlify/functions/pollinations-text?prompt=${encodedPrompt}`;
+  const promptWords = prompt.toLowerCase().split(/\W+/); // Split by non-word characters
+  let score = 0;
 
-  try {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error("Text generation failed");
-    const text = (await response.text()).toLowerCase();  
-    console.log("Pollinations response:", text);
-    const trimmedText = text.trim(); 
-    return trimmedText === "yes"
-  } catch (error) {
-      console.error("Error validating prompt:", error);
-      return false;
+  for (const word of promptWords) {
+    if (uiKeywords[word]) {
+      score += uiKeywords[word];
+    }
   }
+
+  const threshold = 4; // Tune this as needed
+  return score >= threshold;
 }
 
 // Calculate width/height based on chosen ratio
@@ -267,16 +302,18 @@ const handleFormSubmit = async (e) => {
   const aspectRatio = ratioSelect.value || "1/1";
   const promptText = promptInput.value.trim();
 
-  const isValid = await isValidUIPromptUiMock(promptText);
+  // Use the scoring-based validator (synchronous function)
+  const isValid = isValidUIPromptUiMock(promptText);
   if (!isValid) {
     alert("Only UI design prompts are allowed. Please describe a UI component or screen.");
     return;
   }
 
+  // Proceed with generation
   await createImageCards(imageCount, aspectRatio, promptText);
-  await delay(4000);
-  await generateTextCode(`Please provide a detailed explanation along with the code for what was done and ${promptText} do not ask me further just end the conversation politely`);
+  await generateTextCode(`Please provide a detailed explanation along with the code for what was done and ${promptText}. Do not ask me further, just end the conversation politely.`);
 };
+
 
 
 // Fill prompt input with random example (typing effect)
