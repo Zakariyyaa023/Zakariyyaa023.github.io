@@ -200,7 +200,7 @@ const generateImages = async (imageCount, aspectRatio, promptText) => {
 
 // sending requests to poli Api to give texts and code related
 const generateTextCode = async (promptText) => {
-
+  await delay(4000);
   generateBtn.setAttribute("disabled", "true");
   let i = 0;
   let generatedText = "";
@@ -209,7 +209,12 @@ const generateTextCode = async (promptText) => {
     const encodedPrompt = encodeURIComponent(promptText);
     const baseURL = `https://text.pollinations.ai/prompt/${encodedPrompt}`;
 
-    const response = await rateLimitedFetch(baseURL, { method: "GET", headers: { "Accept": "text/plain" } });
+    const response = await fetch(baseURL, {
+      method: "GET",
+      headers: {
+        "Accept": "text/plain",
+      },
+    });
 
     if (!response.ok) {
       throw new Error("Text generation failed");
@@ -237,7 +242,7 @@ const generateTextCode = async (promptText) => {
   } catch (error) {
     console.error("Error generating text/code:", error);
     const codeTextarea = document.getElementById("generatedCode");
-    if (codeTextarea) {More actions
+    if (codeTextarea) {
       codeTextarea.value = "// Error generating code. See console.";
     }
   } 
