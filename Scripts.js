@@ -118,59 +118,30 @@ const examplePrompts = [
   "Online bookstore homepage featuring bestseller carousel, search bar, categories sidebar, and user reviews section.",
   "Healthcare appointment booking UI with doctor list, date/time picker, patient info form, and confirmation screen."
 ];
-// using polinations.ai to check if the content that user gave is UI/UX related
-function isValidUIPromptUiMock(prompt) {
-  const uiKeywords = {
-    "login": 2,
-    "signup": 2,
-    "dashboard": 3,
-    "profile": 2,
-    "screen": 2,
-    "interface": 3,
-    "app": 2,
-    "button": 1,
-    "form": 2,
-    "input": 1,
-    "navbar": 1,
-    "card": 1,
-    "component": 2,
-    "widget": 2,
-    "design": 2,
-    "layout": 2,
-    "ux": 3,
-    "ui": 3,
-    "responsive": 2,
-    "modal": 1,
-    "page": 1,
-    "settings": 1,
-    "toggle": 1,
-    "theme": 1,
-    "avatar": 1,
-    "tab": 1,
-    "grid": 1,
-    "popup": 1,
-    "icon": 1,
-    "tooltip": 1,
-    "user": 1,
-    "chat": 1,
-    "calendar": 1,
-    "timeline": 1,
-    "feed": 1,
-    "search": 1,
-    "navigation": 1
-  };
+async function isValidUIPromptUiMock(prompt) {
+  const question = `Only answer with yes or no, is this a UI Design prompt or related to UI designs prompt = (${prompt})`;
 
-  const promptWords = prompt.toLowerCase().split(/\W+/); // Split by non-word characters
-  let score = 0;
+  const encodedPrompt = encodeURIComponent(question);
+  const url = `https://text.pollinations.ai/prompt/${encodedPrompt}`;
 
-  for (const word of promptWords) {
-    if (uiKeywords[word]) {
-      score += uiKeywords[word];
-    }
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: { "Accept": "text/plain" }
+    });
+
+    if (!response.ok) throw new Error("Text generation failed");
+
+    const text = (await response.text()).toLowerCase();
+
+  
+    console.log("Pollinations response:", text);
+    const trimmedText = text.trim(); 
+    return trimmedText === "yes"
+  } catch (error) {
+    console.error("Error validating prompt:", error);
+    return false;
   }
-
-  const threshold = 4; // Tune this as needed
-  return score >= threshold;
 }
 
 // Calculate width/height based on chosen ratio
@@ -229,17 +200,16 @@ const generateImages = async (imageCount, aspectRatio, promptText) => {
 
 // sending requests to poli Api to give texts and code related
 const generateTextCode = async (promptText) => {
-  
+
   generateBtn.setAttribute("disabled", "true");
-  await delay(4000);
   let i = 0;
   let generatedText = "";
 
   try {
     const encodedPrompt = encodeURIComponent(promptText);
-    const url = `/.netlify/functions/pollinations-text?prompt=${encodedPrompt}`;
+    const baseURL = `https://text.pollinations.ai/prompt/${encodedPrompt}`;
 
-     const response = await fetch(url);
+    const response = await rateLimitedFetch(baseURL, { method: "GET", headers: { "Accept": "text/plain" } });
 
     if (!response.ok) {
       throw new Error("Text generation failed");
@@ -267,7 +237,7 @@ const generateTextCode = async (promptText) => {
   } catch (error) {
     console.error("Error generating text/code:", error);
     const codeTextarea = document.getElementById("generatedCode");
-    if (codeTextarea) {
+    if (codeTextarea) {More actions
       codeTextarea.value = "// Error generating code. See console.";
     }
   } 
@@ -303,8 +273,7 @@ const handleFormSubmit = async (e) => {
   const promptText = promptInput.value.trim();
 
   // Use the scoring-based validator (synchronous function)
-  const isValid = isValidUIPromptUiMock(promptText);
-  if (!isValid) {
+  if (!isValidUIPromptUiMock(promptText)) {
     alert("Only UI design prompts are allowed. Please describe a UI component or screen.");
     return;
   }
