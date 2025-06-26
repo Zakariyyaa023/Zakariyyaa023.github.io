@@ -9,7 +9,7 @@ html{
 
 }
 body {
-  background-color: rgb(100, 150, 200);
+  background: linear-gradient(to bottom, #0d2e50 0%, #000000 100%);
   color: white;
   transition: background 0.2s ease;
 }
@@ -24,70 +24,119 @@ body {
     padding: 10px 10%;
 }
 
+/* Your existing nav styles */
 nav {
-    position: fixed;
-    top: 0;
-    right: 0;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    flex-wrap: wrap;
-    width: 100%;
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  z-index: 1000;
 }
 
 #top-menu {
-    display: flex;
-    align-items: center;
-    background-color: rgba(105, 105, 105, 0.8); /* Slightly darker grey with transparency */
-    padding: 10px 20px;
-    border-radius: 20px;
+  position: fixed;
+  top: 60px;      /* adjust to below hamburger */
+  right: 20px;
+  background: transparent; /* no background */
+  padding: 10px 20px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  
+  transform: translateX(120%); /* hidden off to the right */
+  opacity: 0;
+  pointer-events: none;
+  
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  z-index: 1000;
+}
+
+#top-menu.active {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
 }
 
 
+nav ul li {
+  display: inline-block;
+  list-style: none;
+  margin: 10px 20px;
+}
 
-nav ul li{
-    display: inline-block;
-    list-style: none;
-    margin: 10px 20px;
+nav ul a {
+  color: #FFF;
+  text-decoration: none;
+  font-size: 24px;
+  position: relative;
 }
-nav ul a{
-    color:  #FFF;
-    text-decoration: none;
-    font-size: 24px;
-    position: relative;
-}
+
 nav ul li a::after {
-    content: '';
-    width: 0%;
-    height: 3px;
-    background: #FFD700; /* Gold */
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    transition: 0.5s;
+  content: '';
+  width: 0%;
+  height: 3px;
+  background-color: #00BFFF;
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  transition: 0.5s;
 }
-nav ul li a:hover::after{
-    width: 100%;
+
+nav ul li a:hover::after {
+  width: 100%;
 }
+
+/* Hamburger button styles */
+#hamburger {
+  position: fixed;
+  top: 15px;
+  right: 20px;
+  width: 35px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1100;
+  padding: 0;
+}
+
+#hamburger span {
+  display: block;
+  height: 4px;
+  width: 100%;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
 .introduction-text{
     margin-top: 20%;
     font-size: 30px;
     text-align: right;
 
 }
+
 .introduction-text h1{
     margin-top: 20px;
     font-size: 60px;
     text-align: right;
-}
-.introduction-text h1 span{
-    color: #90EE90;
+    text-shadow:
+        0 0 10px rgba(0, 191, 255, 0.9),
+        0 0 20px rgba(0, 191, 255, 0.7),
+        0 0 30px rgba(0, 191, 255, 0.5);
     text-align: right;
 }
 
 /* ABOUT ME */
-#about{
+#About{
     padding:80px 0;
     color: #ababab;
 
@@ -109,6 +158,14 @@ nav ul li a:hover::after{
     flex-basis: 60%;
 
 }
+.about-col-2 > p {
+  font-size: 20px;
+  max-width: 600px;
+  line-height: 1.5;
+  color: #a0c8ffcc;
+  pointer-events: auto;
+}
+
 .sub-title{
     font-size: 60px;
     font-weight: 600;
@@ -154,6 +211,7 @@ nav ul li a:hover::after{
 .tab-contents.active-tab{
     display: block;
 }
+
 
 /* <-------------------Skills-----------> */
 #Skills{
@@ -233,6 +291,7 @@ nav ul li a:hover::after{
     display: block;
     transition: transform 0.5s;
 }
+
 .layer{
     width:100%;
     height: 0;
@@ -266,14 +325,59 @@ nav ul li a:hover::after{
     height:60px;
     border-radius: 50%;
     text-align: center;
-
 }
+.link-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.link-buttons a {
+  margin-top: 0; /* remove top margin inside flex row */
+}
+
+
 .work:hover img{
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .work:hover .layer{
-    height: 100%;
+  height: 100%;
+}
+
+.hidden-work:hover img{
+  transform: scale(1.1);
+}
+
+.hidden-work:hover .layer{
+  height: 100%;
+}
+.hidden-work-list {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease; /* fast collapse */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 40px;
+  margin-top: 50px;
+  display: grid;
+}
+
+.hidden-work-list.active {
+  max-height: 1000px;
+  transition: max-height 1.5s ease; /* slower expand */
+}
+
+
+.hidden-work{
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.hidden-work img{
+    width: 100%;
+    border-radius: 10px;
+    display: block;
+    transition: transform 1.5s;
 }
 
 
@@ -403,15 +507,28 @@ form .btn2{
   z-index: 999;
 }
 .img-gen-header {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  padding: 0 16px; /* horizontal padding */
+  transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease;
+  margin-bottom: 0; /* avoid margin changes */
+  background-color: #1E90FF;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 32px;
-  background-color: #1E90FF;
-  padding: 12px 16px;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
 }
+
+.img-gen-header.open {
+  max-height: 120px; /* enough for content */
+  opacity: 1;
+  padding: 12px 16px; /* animate vertical padding */
+  margin-bottom: 0; /* keep margin stable */
+}
+
+
 
 .img-gen-header .logo-wrapper {
   display: flex;
@@ -419,7 +536,6 @@ form .btn2{
   align-items: center;
 }
 
-/* fv */
 .img-gen-header .logo-wrapper h1 {
   font-size: 1.9rem;
   font-weight: 700;
@@ -729,3 +845,120 @@ form .btn2{
   background: var(--color-card);
   background-image: radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 35%), radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.15) 0%, transparent 35%), radial-gradient(circle at 50% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 40%);
 }
+
+
+#starfield {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* so clicks pass through */
+  z-index: 1000;
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+  from {opacity: 0.3;}
+  to {opacity: 1;}
+}
+
+/* Shooting star style */
+.shooting-star {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(45deg, white, rgba(255,255,255,0));
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(0) translateY(0) rotate(45deg);
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-fill-mode: forwards;
+}
+
+/* Shooting star animation */
+@keyframes shooting {
+  0% {
+    opacity: 1;
+    transform: translateX(0) translateY(0) rotate(45deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(500px) translateY(500px) rotate(45deg);
+  }
+}
+
+/* Fog / clouds near horizon */
+.fog {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 70%, rgba(255, 255, 255, 0.15), transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2), transparent 40%),
+    radial-gradient(circle at 80% 60%, rgba(255, 255, 255, 0.12), transparent 40%);
+  filter: blur(20px);
+  z-index: 999;
+  display: none; /* hide initially */
+}
+
+
+
+
+.aurora {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  pointer-events: none;
+  background: linear-gradient(
+    270deg,
+    rgba(0, 191, 255, 0.6),
+    rgba(0, 100, 255, 0.3),
+    rgba(0, 191, 255, 0.6)
+  );
+  background-size: 600% 100%;
+  filter: blur(20px);
+  animation: auroraMove 20s linear infinite;
+  z-index: 50;
+}
+
+@keyframes auroraMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+.mist {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 25% 40%, rgba(255, 255, 255, 0.12), transparent 60%),
+    radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.08), transparent 50%);
+  filter: blur(25px);
+  animation: mistDrift 40s ease-in-out infinite alternate;
+  z-index: 55;
+  opacity: 0.6;
+}
+
+@keyframes mistDrift {
+  0% { background-position: 0% 0%, 0% 0%; }
+  100% { background-position: 15% 0%, -15% 0%; }
+}
+
