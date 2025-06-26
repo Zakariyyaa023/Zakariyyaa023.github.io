@@ -2,6 +2,7 @@
 var tablinks = document.getElementsByClassName("tab-links");
 var tabcontents = document.getElementsByClassName("tab-contents");
 
+
 function opentab(tabname){
   for (let tablink of tablinks){
     tablink.classList.remove("active-link");
@@ -84,6 +85,7 @@ const modelSelect = document.getElementById("model-select");
 const countSelect = document.getElementById("count-select");
 const ratioSelect = document.getElementById("ratio-select");
 const textArea = document.getElementById("generatedCode");
+
 
 // Example prompts
 const examplePrompts = [
@@ -319,22 +321,111 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggleBtn = document.getElementById('chatToggleBtn');
   const popup = document.getElementById('generatorPopup');
   const generateIcon = document.getElementById('open-generator-icon');
+  const header = popup.querySelector('.img-gen-header'); // find header inside popup
+  const closeBtn = document.getElementById('popupCloseBtn');
+
+  function openPopup() {
+    popup.classList.remove('hidden');
+    // small delay to trigger CSS transition on header
+    setTimeout(() => {
+      header.classList.add('open');
+    }, 50);
+  }
+
+  function closePopup() {
+    header.classList.remove('open');
+    // wait for transition before hiding popup
+    setTimeout(() => {
+      popup.classList.add('hidden');
+    }, 400); // match transition duration in CSS
+  }
 
   toggleBtn.addEventListener('click', () => {
-    popup.classList.toggle('hidden');
+    if (popup.classList.contains('hidden')) {
+      openPopup();
+    } else {
+      closePopup();
+    }
   });
-  generateIcon.addEventListener('click', () => {
-     event.preventDefault();
-    popup.classList.toggle('hidden');
+
+  generateIcon.addEventListener('click', (event) => {
+    event.preventDefault();
+    if (popup.classList.contains('hidden')) {
+      openPopup();
+    } else {
+      closePopup();
+    }
+  });
+
+  closeBtn.addEventListener('click', () => {
+    closePopup();
   });
 });
 
-document.getElementById('popupCloseBtn').addEventListener('click', () => {
-  document.getElementById('generatorPopup').classList.add('hidden');
-  document.getElementById('open-generator-icon').classList.add('hidden');
+
+document.querySelector(".btn").addEventListener('click', (e) => {
+  e.preventDefault(); 
+  const hiddenWork = document.querySelector(".hidden-work-list");
+
+  // Toggle the "active" class only
+  hiddenWork.classList.toggle("active");
 });
+
+
 
 promptFormUI.addEventListener("submit", handleFormSubmit);
 function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+const starfield = document.getElementById('starfield');
+// const fog = document.querySelector('.fog');
+let shootingStarInterval;
+
+// Create stars immediately on load
+createStars(150); // increase or decrease as you like
+
+// Show the starfield and fog immediately if you want
+starfield.classList.remove('hidden');
+// fog.style.display = 'block';
+
+// Start shooting stars interval immediately
+shootingStarInterval = setInterval(() => {
+  createShootingStar();
+}, 1500 + Math.random() * 1500);
+
+
+// Keep your existing functions unchanged:
+function createStars(num) {
+  for (let i = 0; i < num; i++) {
+    const star = document.createElement('div');
+    star.classList.add('star');
+    const size = Math.random() * 3 + 1;
+    star.style.width = size + 'px';
+    star.style.height = size + 'px';
+    star.style.top = Math.random() * window.innerHeight + 'px';
+    star.style.left = Math.random() * window.innerWidth + 'px';
+    star.style.animationDuration = (Math.random() * 3 + 1) + 's';
+    starfield.appendChild(star);
+  }
+}
+
+function createShootingStar() {
+  const shootingStar = document.createElement('div');
+  shootingStar.classList.add('shooting-star');
+  shootingStar.style.top = Math.random() * 200 + 'px';
+  shootingStar.style.left = Math.random() * (window.innerWidth / 2) + 'px';
+  const duration = 1000 + Math.random() * 1000;
+  shootingStar.style.animation = `shooting ${duration}ms linear forwards`;
+  document.body.appendChild(shootingStar);
+  setTimeout(() => shootingStar.remove(), duration);
+}
+
+
+ const hamburger = document.getElementById('hamburger');
+  const menu = document.getElementById('top-menu');
+
+hamburger.addEventListener('click', () => {
+  const isActive = menu.classList.toggle('active');
+  hamburger.setAttribute('aria-expanded', isActive);
+});
