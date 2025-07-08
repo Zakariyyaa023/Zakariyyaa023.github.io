@@ -15,6 +15,7 @@
         <div class="mist"></div>
         
         <div id ="Header">
+            <div id="menu-overlay"></div>
             <div class="container">
                 <button id="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="top-menu">
                     <span></span>
@@ -41,7 +42,7 @@
     <!-- ABOUT ME -->
         <div id="About">
             <div class="container">
-                <div class="row">
+                <div class="row">a
                     <div class="about-col-1">
 <!--                    <img src="images/ZAC3..JPG">--></div>    
                     <div class="about-col-2">
@@ -86,80 +87,77 @@
         </div>
 
     <!------------------- portfolio --------------------->
-        <div id="Portfolio">
-            <div class="container">
-                <h1 class="sub-title">My Work</h1>
-                <div class="work-list">
-                    <div class="work">
-                        <img src="https://framerusercontent.com/images/g0YTRh7uRHpbWQgSZz62bO050.png">
-                        <div class="layer">
-                            <h3>AI Chat Bot</h3>
-                            <p>An AI chatbot that is a conversational tool that provides personalized information about me. It can answer questions, share details about interests, preferences, skills, or background, and engage in dynamic conversations based on my profile</p>
-                            <a href="#" id="open-chatbot"><i class="fas fa-robot" style="color: #306998;"></i> </a>
-                        </div>
-                    </div>
+    <div id="Portfolio">
+        <div class="container">
+            <h1 class="sub-title">My Work</h1>
 
-                    <div class="work">
-                        <img src="images/github.jpg">
-                        <div class="layer">
-                            <h3>Github User Activity</h3>
-                            <p>A Java, GitHub User Activity CLI is a command-line tool that fetches and displays a GitHub user's recent activity—such as commits, pull requests, issues, and stars</p>
-                            <a href = "https://github.com/Zakariyyaa023/GitHub_User_Activity" ><i class="fas fa-link" style="color: blue"></i></a>
-                        </div>
-                    </div>
-                    <div id="work" >
-                        <div class="work">
-                            <img src="https://thepythoncode.com/media/articles/alarm-clock-app-using-tkinter-in-python.jpg">
-                            <div class="layer">
-                                <h3>Alarm Program</h3>
-                                <p>A python CLI program allows you to set an alarm that will trigger a sound at a specified time and date. It validates both </p>
-                                <a href = "https://github.com/Zakariyyaa023/alarm_clock" ><span style="font-size: 24px;">⏰</span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="work">
-                        <div id="work" >
-                            <div class="work">
-                                <img src="images/a-picture-of-a-ai-that-is-using-a-designs-on-a-screen-the-back-ground-be-generatating.jpg" >
-                                <div class="layer">
-                                    <h3>AI-Powered UI Design Generator</h3>
-                                    <p>An AI tool that quickly creates user-friendly interface layouts and styles based on your needs.</p>
-                                    <a href="#" id="open-generator-icon"><span class="fas fa-brain" style="color: blue"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
+            <div class="work-list">
+      <!-- Card 1 -->
+            <div class="work-card">
+                <img src="https://framerusercontent.com/images/g0YTRh7uRHpbWQgSZz62bO050.png" alt="AI Chat Bot">
+                <div class="content">
+                <h3>AI Chat Bot</h3>
+                <p>An AI chatbot that provides personalized info about me, answering questions and engaging in dynamic conversations based on my profile.</p>
+               <a href="#" id="open-chatbot" class="try-it-link">Try it out</a>
                 </div>
-                <div class="hidden-work-list" >
-                    <div class="hidden-work">
-                        <img src="images/resume-gen.jpg" >
-                        <div class="layer">
-                            <h3>Resume Generator</h3>
-                            <p>An AI-powered resume generator uses artificial intelligence to automatically create customized and professional resumes based on user input.</p>
-                            <div class="link-buttons">
-                                <a href="https://zakariyyaa023.github.io/Resume-Generator/" id="open-generator-icon">
-                                    <span class="fas fa-wand-magic-sparkles" style="color: blue;"></span>
-                                </a>
-                                <a href="https://github.com/Zakariyyaa023/Resume-Generator" id="open-generator-icon">
-                                    <span class="fab fa-github" style="color: blue;"></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hidden-work">
-                        <img src="" >
-                    </div>
-                    <div class="hidden-work">
-                        <img src="" >
-                    </div>
-                    <div class="hidden-work">
-                        <img src="" >       
-                    </div>
-                </div>
-                
-                <a href="#" class="btn">See More</a>
-                </div>
+            </div>
+
+      <!-- Card 2 -->
+      <div class="work-card">
+        <img src="images/github.jpg" alt="Github User Activity">
+        <div class="content">
+          <h3>Github User Activity</h3>
+          <p>A CLI Java tool that fetches and displays a GitHub user's recent activity—commits, pull requests, stars, and more.</p>
+          <a href="https://github.com/Zakariyyaa023/GitHub_User_Activity" id="" class="try-it-link">View GitHub Repo</a>
         </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="work-card">
+        <img src="https://thepythoncode.com/media/articles/alarm-clock-app-using-tkinter-in-python.jpg" alt="Alarm Program">
+        <div class="content">
+          <h3>Alarm Program</h3>
+          <p>A Python CLI alarm clock app that lets you set alarms which trigger sounds at specific times with input validation.</p>
+          <a href="https://github.com/Zakariyyaa023/alarm_clock" id="" class="try-it-link">View GitHub Repo</a>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="work-card">
+        <img src="images/a-picture-of-a-ai-that-is-using-a-designs-on-a-screen-the-back-ground-be-generatating.jpg" alt="AI UI Generator">
+        <div class="content">
+            <h3>AI-Powered UI Design Generator</h3>
+            <p>An AI tool that rapidly creates user-friendly interface designs and layouts tailored to your needs.</p>
+            <div class="button-group">
+                <a href="https://custom-content-gen.netlify.app/" class="action-link">Try it out</a>
+                <a href="https://github.com/Zakariyyaa023/Mockup-gen" class="action-link">View GitHub Repo</a>
+            </div>
+
+
+        </div>
+      </div>
+
+    <!-- Card 5 -->
+    <div class="hidden-work-list">
+            <div class="hidden-work">
+                <img src="images/resume-gen.jpg" alt="Resume Generator">
+                    <div class="layer">
+                        <h3>Resume Generator</h3>
+                        <p>An AI-powered app that automatically creates professional resumes based on your input.</p>
+                        <div class="button-group">
+                            <a href="https://zakariyyaa023.github.io/Resume-Generator/"class="action-link">Try it out</a>
+                            <a href="https://github.com/Zakariyyaa023/Resume-Generator" class="action-link">View GitHub Repo</a>
+                        </div>
+                    </div>
+            </div>
+    </div>
+
+    </div>
+
+    <a href="#" class="btn">See More</a>
+  </div>
+</div>
+
     <!-------------------- CONTACT ------------------------------>
         <div id="Contact" class="container">
             <div class="row">
