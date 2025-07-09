@@ -135,3 +135,41 @@ hamburger.addEventListener('click', () => {
   const isActive = menu.classList.toggle('active');
   hamburger.setAttribute('aria-expanded', isActive);
 });
+
+document.getElementById('contactForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent normal form submission
+
+    const form = event.target;
+    const formData = new FormData(form);
+    const messageBox = document.getElementById('formMessage');
+
+    fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(response => {
+        if (response.ok) {
+            messageBox.style.color = 'green';
+            messageBox.textContent = "Email sent successfully!";
+            messageBox.style.display = 'block';
+            form.reset();
+        } else {
+            response.json().then(data => {
+                if (Object.hasOwn(data, 'errors')) {
+                    messageBox.style.color = 'red';
+                    messageBox.textContent = data["errors"].map(error => error["message"]).join(", ");
+                } else {
+                    messageBox.style.color = 'red';
+                    messageBox.textContent = "Oops! There was a problem submitting your form.";
+                }
+                messageBox.style.display = 'block';
+            });
+        }
+    }).catch(() => {
+        messageBox.style.color = 'red';
+        messageBox.textContent = "Oops! There was a problem submitting your form.";
+        messageBox.style.display = 'block';
+    });
+});
