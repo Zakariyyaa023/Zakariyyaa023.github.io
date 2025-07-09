@@ -529,6 +529,43 @@ form .btn2{
   margin: 10px 0;
   font-size: 16px;
 }
+
+  #formMessage {
+    margin-top: 15px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #00ffff; /* bright cyan */
+    background: linear-gradient(90deg, #001f3f, #003366);
+    padding: 12px 20px;
+    border-radius: 12px;
+    box-shadow:
+      0 0 10px #00ffffaa,
+      0 0 20px #00ffff88,
+      0 0 30px #00ffff66;
+    text-align: center;
+    letter-spacing: 1.2px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  #formMessage.success {
+    background: linear-gradient(90deg, #005f3f, #008866);
+    box-shadow:
+      0 0 12px #00ffcccc,
+      0 0 24px #00ffccbb,
+      0 0 36px #00ffccaa;
+    color: #ccfffa;
+  }
+
+  #formMessage.error {
+    background: linear-gradient(90deg, #660000, #990000);
+    box-shadow:
+      0 0 12px #ff4444cc,
+      0 0 24px #ff4444bb,
+      0 0 36px #ff4444aa;
+    color: #fff0f0;
+  }
 /************************ Image generator *******************************/
 .floating-toggle-btn {
   position: fixed;
