@@ -134,10 +134,13 @@ function createShootingStar() {
 hamburger.addEventListener('click', () => {
   const isActive = menu.classList.toggle('active');
   hamburger.setAttribute('aria-expanded', isActive);
+  
 });
 
+
+
 document.getElementById('contactForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent normal form submission
+    event.preventDefault();
 
     const form = event.target;
     const formData = new FormData(form);
@@ -151,25 +154,82 @@ document.getElementById('contactForm').addEventListener('submit', function(event
         }
     }).then(response => {
         if (response.ok) {
-            messageBox.style.color = 'green';
+            messageBox.classList.remove('error');
+            messageBox.classList.add('success');
             messageBox.textContent = "Email sent successfully!";
-            messageBox.style.display = 'block';
+            messageBox.style.display = 'block'; // show message
             form.reset();
         } else {
             response.json().then(data => {
-                if (Object.hasOwn(data, 'errors')) {
-                    messageBox.style.color = 'red';
-                    messageBox.textContent = data["errors"].map(error => error["message"]).join(", ");
+                messageBox.classList.remove('success');
+                messageBox.classList.add('error');
+                if (data && data.errors) {
+                    messageBox.textContent = data.errors.map(error => error.message).join(", ");
                 } else {
-                    messageBox.style.color = 'red';
                     messageBox.textContent = "Oops! There was a problem submitting your form.";
                 }
-                messageBox.style.display = 'block';
+                messageBox.style.display = 'block'; // show message
             });
         }
     }).catch(() => {
-        messageBox.style.color = 'red';
+        messageBox.classList.remove('success');
+        messageBox.classList.add('error');
         messageBox.textContent = "Oops! There was a problem submitting your form.";
-        messageBox.style.display = 'block';
+        messageBox.style.display = 'block'; // show message
     });
 });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('contactForm');
+    const messageBox = document.getElementById('formMessage');
+    const emailInput = form.querySelector('input[name="email"]');
+
+    // Remove error class while typing
+    emailInput.addEventListener('input', function () {
+      this.classList.remove('error');
+    });
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+
+      fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          messageBox.className = 'success';
+          messageBox.textContent = "Email sent successfully!";
+          messageBox.style.display = 'block';
+          emailInput.classList.remove('error');
+          form.reset();
+        } else {
+          response.json().then(data => {
+            messageBox.className = 'error';
+            messageBox.style.display = 'block';
+
+            if (data && data.errors) {
+              messageBox.textContent = data.errors.map(e => e.message).join(", ");
+
+              // If email error, highlight input
+              const hasEmailError = data.errors.some(e => e.message.toLowerCase().includes("email"));
+              if (hasEmailError) {
+                emailInput.classList.add('error');
+              }
+            } else {
+              messageBox.textContent = "Oops! There was a problem submitting your form.";
+            }
+          });
+        }
+      }).catch(() => {
+        messageBox.className = 'error';
+        messageBox.textContent = "Oops! There was a problem submitting your form.";
+        messageBox.style.display = 'block';
+      });
+    });
+  });
