@@ -172,14 +172,15 @@
                     <a href="images/Zakariyyaa_Davids_CV.zip" download class="btn btn2">Download Cv(.zip)</a>
                 </div>
                 <div class="contact-right">
-                    <form action="https://api.web3forms.com/submit" method="POST">
-                        <input type="hidden" name="access_key" value="f990edf1-ad3e-4ec7-ad7a-a827c95297a9">
+                    <form id="contactForm" action="https://formspree.io/f/movwobqe" method="POST">
                         <input type="text" name="Name" placeholder="Your Name" required>
                         <input type="email" name="email" placeholder="Your Email" required>
                         <textarea name="Message" rows="9" placeholder="Your Message" required></textarea>
+                        <div id="formMessage">Email sent successfully!</div>
                         <button type="submit" class="btn btn2">Submit</button>
                     </form>
                 </div>
+                
             </div>
         </div>
         <div id="starfield" class="hidden"></div>
