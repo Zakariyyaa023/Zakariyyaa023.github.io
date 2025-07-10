@@ -23,7 +23,11 @@ body {
 .container{
     padding: 10px 10%;
 }
-
+.burger-container {
+      max-width: 900px;
+      margin: 100px auto 0;
+      padding: 0 20px;
+    }
 /* Your existing nav styles */
 nav {
   position: fixed;
@@ -56,24 +60,21 @@ nav {
 }
 
 #top-menu {
-  z-index: 1000;
-  position: fixed;
-  top: 60px;      /* below hamburger */
-  right: 20px;
-  background: transparent;   /* default transparent */
-  padding: 10px 20px;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  
-  transform: translateX(120%);
-  opacity: 0;
-  pointer-events: none;
-  
-  transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
-}
-
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      margin-right: 50px;
+      text-align: right;
+    }
+#top-menu li {
+      margin: 10px 0;
+    }
+#top-menu li a {
+      color: #0ff;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
 #top-menu.active {
   position: fixed;
   left: 0;
@@ -114,13 +115,10 @@ nav {
 }
 
 @keyframes currentFlow {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
+
 
 
 
@@ -153,32 +151,37 @@ nav ul li a::after {
 nav ul li a:hover::after {
   width: 100%;
 }
+.menu-container.closing {
+  transform: translateX(100%);  /* slide to right */
+  opacity: 0;                   /* fade out */
+  pointer-events: none;
+}
 
 /* Hamburger button styles */
-#hamburger {
-  position: fixed;
-  top: 15px;
-  right: 20px;
-  width: 35px;
-  height: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  z-index: 1100;
-  padding: 0;
-}
+   #hamburger {
+      position: fixed;
+      top: 15px;
+      right: 20px;
+      width: 35px;
+      height: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 2000;
+    }
 
-#hamburger span {
-  display: block;
-  height: 4px;
-  width: 100%;
-  background: white;
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
+    #hamburger span {
+      display: block;
+      height: 4px;
+      width: 100%;
+      background: white;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
 
 .introduction-text{
     margin-top: 20%;
@@ -808,6 +811,52 @@ form .btn2{
   filter: blur(20px);
   animation: auroraMove 20s linear infinite;
   z-index: 50;
+}
+.menu-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  padding: 60px 20px 20px;
+  background: transparent;
+  transform: translateX(100%);  /* slide from right */
+  opacity: 0;                   /* fade out */
+  pointer-events: none;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  z-index: 1000;
+}
+.menu-container.active {
+  transform: translateX(0);     /* slide into view */
+  opacity: 1;                   /* fade in */
+  pointer-events: auto;
+
+  /* 💡 BACKDROP BLUR + color */
+  background-color: rgba(11, 20, 55, 0.7); /* semi-transparent dark blue */
+  backdrop-filter: blur(8px);             /* glassy blur effect */
+
+  background-image:
+    linear-gradient(rgba(0, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+  overflow: hidden;
+}
+.menu-container.active::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 255, 0.2),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: currentFlow 4s linear infinite;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  z-index: 1;
 }
 
 @keyframes auroraMove {
