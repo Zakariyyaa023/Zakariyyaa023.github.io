@@ -249,5 +249,5 @@ document.addEventListener('DOMContentLoaded', function () {
         messageBox.textContent = "Oops! There was a problem submitting your form.";
         messageBox.style.display = 'block';
       });
-    });
-  });
+    })
+});
