@@ -9,180 +9,161 @@ html{
 
 }
 body {
-  background: linear-gradient(to bottom, #0d2e50 0%, #000000 100%);
-  color: white;
-  transition: background 0.2s ease;
+    background: linear-gradient(to bottom, #0d2e50 0%, #000000 100%);
+    color: white;
+    transition: background 0.2s ease;
 }
-#header{
-    width: 100%;
-    height: 100vh;
-    background-image: url(images/ZAC233.JPG);
-    background-size: cover;
-    background-position: center;
-}
+
 .container{
     padding: 10px 10%;
 }
-.burger-container {
-      max-width: 900px;
-      margin: 100px auto 0;
-      padding: 0 20px;
-    }
-/* Your existing nav styles */
-nav {
-  position: fixed;
-  top: 0;
-  right: 0;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 100%;
-  z-index: 1000;
-}
 
-#menu-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: red;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  z-index: 900; /* below menu but above everything else */
-}
-
-#menu-overlay.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
+/* -------------------------------------top-menu visuals------------------------------------------- */
 #top-menu {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      margin-right: 50px;
-      text-align: right;
-    }
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-right: 50px;
+    text-align: right;
+}
 #top-menu li {
-      margin: 10px 0;
-    }
+    margin: 10px 0;
+}
 #top-menu li a {
-      color: #0ff;
-      text-decoration: none;
-      font-size: 1.2rem;
-      font-weight: bold;
-    }
-#top-menu.active {
-  position: fixed;
-  left: 0;
-  right: 0;
-  width: 100%;
-  transform: translateX(0);
-  opacity: 1; /* opacity 10 is invalid, max is 1 */
-  pointer-events: auto;
-  background: #0b1437; /* dark blue */
-  z-index: 9999;
-  
-  /* Add a circuit pattern using a subtle grid with glowing lines */
-  background-image:
-    linear-gradient(rgba(0, 255, 255, 0.15) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 255, 0.15) 1px, transparent 1px);
-  background-size: 40px 40px;
+    color: #0ff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+#top-menu li a {
+    position: relative;
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 20px;   
+    font-weight: 700;     
+}
 
-  /* Optional: animated "current" lines moving horizontally */
-  position: relative;
-  overflow: hidden;
+#top-menu li a:hover {
+    color: #0ff; /* neon blue text color */
+}
+
+#top-menu li a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px; /* space between text and underline */
+    width: 0;
+    height: 4px;   /* thicker underline */
+    background: linear-gradient(90deg, 
+      #00f, #0ff, #00f); /* neon blue fire gradient */
+    box-shadow:
+      0 0 6px #0ff,
+      0 0 12px #0ff,
+      0 0 24px #0ff,
+      0 0 36px #0ff;
+    border-radius: 2px;
+    transition: width 0.4s ease;
+}
+
+#top-menu li a:hover::after {
+    width: 100%;
+    animation: flicker 1.5s infinite alternate;
+}
+@keyframes flicker {
+    0%, 100% {
+      box-shadow:
+        0 0 6px #0ff,
+        0 0 12px #0ff,
+        0 0 24px #0ff,
+        0 0 36px #0ff;
+    }
+    50% {
+      box-shadow:
+        0 0 9px #33ffff,
+        0 0 18px #33ffff,
+        0 0 30px #33ffff,
+        0 0 45px #33ffff;
+    }
+}
+
+#top-menu.active {
+    position: fixed;
+    left: 0;
+    right: 0;
+    width: 100%;
+    transform: translateX(0);
+    opacity: 1; /* opacity 10 is invalid, max is 1 */
+    pointer-events: auto;
+    background: #0b1437; /* dark blue */
+    z-index: 9999;
+    
+    /* Add a circuit pattern using a subtle grid with glowing lines */
+    background-image:
+      linear-gradient(rgba(0, 255, 255, 0.15) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 255, 0.15) 1px, transparent 1px);
+    background-size: 40px 40px;
+
+    /* Optional: animated "current" lines moving horizontally */
+    position: relative;
+    overflow: hidden;
 }
 
 
 #top-menu.active::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(0, 255, 255, 0.4),
-    transparent
-  );
-  background-size: 200% 100%;
-  animation: currentFlow 4s linear infinite;
-  pointer-events: none;
-  mix-blend-mode: screen;
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(0, 255, 255, 0.4),
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: currentFlow 4s linear infinite;
+    pointer-events: none;
+    mix-blend-mode: screen;
 }
 
 @keyframes currentFlow {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
 }
 
 
-
-
-
-
-nav ul li {
-  display: inline-block;
-  list-style: none;
-  margin: 10px 20px;
-}
-
-nav ul a {
-  color: #FFF;
-  text-decoration: none;
-  font-size: 24px;
-  position: relative;
-}
-
-nav ul li a::after {
-  content: '';
-  width: 0%;
-  height: 3px;
-  background-color: #00BFFF;
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  transition: 0.5s;
-}
-
-nav ul li a:hover::after {
-  width: 100%;
-}
 .menu-container.closing {
-  transform: translateX(100%);  /* slide to right */
-  opacity: 0;                   /* fade out */
+  transform: translateX(100%);  
+  opacity: 0;   
   pointer-events: none;
 }
 
-/* Hamburger button styles */
-   #hamburger {
-      position: fixed;
-      top: 15px;
-      right: 20px;
-      width: 35px;
-      height: 30px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      z-index: 2000;
-    }
+/*-------------------------- Hamburger button styles---------------------------- */
+#hamburger {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    width: 35px;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 2000;
+}
 
-    #hamburger span {
-      display: block;
-      height: 4px;
-      width: 100%;
-      background: white;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-
+#hamburger span {
+    display: block;
+    height: 4px;
+    width: 100%;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+/* ------------------introduction-text--------------------------- */
 .introduction-text{
     margin-top: 20%;
     font-size: 30px;
@@ -201,7 +182,7 @@ nav ul li a:hover::after {
     text-align: right;
 }
 
-/* ABOUT ME */
+/* ------------------About me--------------------------- */
 #About{
     padding:80px 0;
     color: #ababab;
@@ -225,11 +206,11 @@ nav ul li a:hover::after {
 
 }
 .about-col-2 > p {
-  font-size: 20px;
-  max-width: 600px;
-  line-height: 1.5;
-  color: #a0c8ffcc;
-  pointer-events: auto;
+    font-size: 20px;
+    max-width: 600px;
+    line-height: 1.5;
+    color: #a0c8ffcc;
+    pointer-events: auto;
 }
 
 
@@ -275,87 +256,86 @@ nav ul li a:hover::after {
 }
 
 
-/* <-------------------Skills-----------> */
+/* <--------------------------------Skills----------------------------------------> */
 #Skills {
-  padding: 100px 10% 150px;
-  position: relative;
-  z-index: 2;
-  font-size: 3rem;
-  text-align: center;
-  color: #1e90ff;
-  text-shadow: 0 0 20px #1e90ff;
-  margin-bottom: 60px;
+    padding: 100px 10% 150px;
+    position: relative;
+    z-index: 2;
+    font-size: 3rem;
+    text-align: center;
+    color: #1e90ff;
+    text-shadow: 0 0 20px #1e90ff;
+    margin-bottom: 60px;
 }
 
 .Skills-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
 }
 
 .Skills-list div {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(30, 144, 255, 0.3);
-  border-radius: 20px;
-  padding: 50px 20px;
-  text-align: center;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 0 15px rgba(30, 144, 255, 0.1);
-  transition: transform 0.5s ease, box-shadow 0.5s ease;
-  position: relative;
-  overflow: hidden;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(30, 144, 255, 0.3);
+    border-radius: 20px;
+    padding: 50px 20px;
+    text-align: center;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 15px rgba(30, 144, 255, 0.1);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .Skills-list div::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.02), transparent 70%);
-  transform: translate(-50%, -50%) rotate(25deg);
-  opacity: 0.3;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.02), transparent 70%);
+    transform: translate(-50%, -50%) rotate(25deg);
+    opacity: 0.3;
 }
 
 .Skills-list div:hover {
-  transform: translateY(-10px) scale(1.03);
-  box-shadow: 0 0 30px rgba(30, 144, 255, 0.6);
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 0 30px rgba(30, 144, 255, 0.6);
 }
 
 .Skills-list i {
-  font-size: 4rem;
-  margin-bottom: 20px;
-  color: #1e90ff;
-  text-shadow: 0 0 15px #1e90ff;
-  transition: transform 0.4s ease, color 0.4s ease;
+    font-size: 4rem;
+    margin-bottom: 20px;
+    color: #1e90ff;
+    text-shadow: 0 0 15px #1e90ff;
+    transition: transform 0.4s ease, color 0.4s ease;
 }
 
 .Skills-list div:hover i {
-  transform: scale(1.25) rotate(-5deg);
-  color: #ffffff;
+    transform: scale(1.25) rotate(-5deg);
+    color: #ffffff;
 }
 
 .Skills-list h2 {
-  font-size: 1.5rem;
-  color: #d9ecff;
-  margin: 0;
-  text-shadow: 0 0 8px rgba(30, 144, 255, 0.3);
-  transition: color 0.3s ease;
+    font-size: 1.5rem;
+    color: #d9ecff;
+    margin: 0;
+    text-shadow: 0 0 8px rgba(30, 144, 255, 0.3);
+    transition: color 0.3s ease;
 }
 
 .Skills-list div:hover h2 {
-  color: #ffffff;
+    color: #ffffff;
 }
 
-/* Responsive Typography */
 @media (max-width: 768px) {
-  .sub-title {
-    font-size: 2.4rem;
+    .sub-title {
+        font-size: 2.4rem;
   }
 
-  .Skills-list i {
-    font-size: 3.2rem;
+    .Skills-list i {
+        font-size: 3.2rem;
   }
 }
 
@@ -374,41 +354,111 @@ nav ul li a:hover::after {
     background: #1E90FF;
 
 }
-/* portfolio */
+/*-------------------------------- portfolio(My Work) ----------------------------------------------*/
+/* Container layout */
+.work-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
 
-
-.work{
+/* Each card */
+.work-card {
+    background: #0f172a;
+    border: 1px solid #2c3e50;
     border-radius: 10px;
-    position: relative;
     overflow: hidden;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 10px rgba(0, 245, 212, 0.05);
 }
-.work img{
+
+/* Image on top */
+  .work-card img {
     width: 100%;
-    border-radius: 10px;
-    display: block;
-    transition: transform 0.5s;
+    height: 180px;
+    object-fit: cover;
 }
 
-
-.link-buttons {
-  display: flex;
-  gap: 15px;
-  margin-top: 20px;
+/* Card content */
+.work-card .content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
 }
 
-.link-buttons a {
-  margin-top: 0; /* remove top margin inside flex row */
+/* Links */
+.work-card a {
+    color: #00f5d4;
+    text-decoration: none;
+    font-size: 1.2rem;
 }
 
-
-.work:hover img{
-  transform: scale(1.1);
+.work-card .link-buttons {
+    display: flex;
+    gap: 1rem;
 }
 
-.work:hover .layer{
-  height: 100%;
+/* Optional: Add hover effect for desktops (but not required on mobile) */
+@media (hover: hover) {
+      .work-card:hover {
+        box-shadow: 0 0 20px rgba(0, 245, 212, 0.2);
+        transform: translateY(-2px);
+        transition: 0.3s ease;
+    }
 }
 
+.try-it-link {
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    margin-top: 1rem;
+    color: #00f5d4;
+    border: 2px solid #00f5d4;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 1rem;
+    text-align: center;
+}
+
+/* Optional hover effect for desktop */
+@media (hover: hover) {
+    .try-it-link:hover {
+        background-color: #00f5d4;
+        color: #0f172a;
+    }
+}
+.button-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap; /* Allows wrapping on small screens */
+}
+
+.action-link {
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    color: #00f5d4;
+    border: 2px solid #00f5d4;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1rem;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Optional hover for desktops */
+@media (hover: hover) {
+    .action-link:hover {
+        background-color: #00f5d4;
+        color: #0f172a;
+    }
+}
 .hidden-work:hover img{
   transform: scale(1.1);
 }
@@ -428,7 +478,7 @@ nav ul li a:hover::after {
 
 .hidden-work-list.active {
   max-height: 1000px;
-  transition: max-height 1.5s ease; /* slower expand */
+  transition: max-height 1.5s ease;
 }
 
 
@@ -510,32 +560,32 @@ form .btn2{
 
 }
 .toggle-tab {
-  cursor: pointer;
-  color: #555;
-  font-weight: bold;
-  transition: color 0.3s;
+    cursor: pointer;
+    color: #555;
+    font-weight: bold;
+    transition: color 0.3s;
 }
 
 .toggle-tab:hover {
-  color: #6495ED;
+    color: #6495ED;
 }
 
 .toggle-tab.active {
-  color: #6495ED;
-  text-decoration: underline;
+    color: #6495ED;
+    text-decoration: underline;
 }
 
-.achievement-list {
-  list-style: none;
-  padding: 0;
+/* .achievement-list {
+    list-style: none;
+    padding: 0;
 }
 
 .achievement-list li {
-  margin: 10px 0;
-  font-size: 16px;
-}
+    margin: 10px 0;
+    font-size: 16px;
+} */
 
-   #formMessage {
+#formMessage {
     margin-top: 15px;
     font-size: 1.4rem;
     font-weight: 700;
@@ -553,454 +603,197 @@ form .btn2{
     user-select: none;
     transition: background 0.3s ease, box-shadow 0.3s ease;
     display: none; /* hidden by default */
-  }
+}
 
-  #formMessage.success {
+#formMessage.success {
     background: linear-gradient(90deg, #005f3f, #008866);
     box-shadow:
       0 0 12px #00ffcccc,
       0 0 24px #00ffccbb,
       0 0 36px #00ffccaa;
     color: #ccfffa;
-  }
+}
 
-  #formMessage.error {
+#formMessage.error {
     background: linear-gradient(90deg, #660000, #990000);
     box-shadow:
       0 0 12px #ff4444cc,
       0 0 24px #ff4444bb,
       0 0 36px #ff4444aa;
     color: #fff0f0;
-  }
-/************************ Image generator *******************************/
-.floating-toggle-btn {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  z-index: 1000;
-  background-color: #4682B4;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  padding: 16px;
-  font-size: 20px;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  transition: 0.3s ease;
-}
-
-.floating-toggle-btn:hover {
-  background-color:  #1E90FF;
-}
-.hidden {
-  display: none;
-}
-#generatorPopup {
-  position: fixed;
-  bottom: 80px;
-  left: 20px;
-  width: 40%;
-  height: 70%;
-  max-height: 90vh;
-  overflow-y: auto;
-  background-color: #1e1e2f;
-  color: white;
-  border-radius: 7%;
-  padding: 20px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-  z-index: 999;
-}
-.img-gen-header {
-  overflow: hidden;
-  max-height: 0;
-  opacity: 0;
-  padding: 0 16px; /* horizontal padding */
-  transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease;
-  margin-bottom: 0; /* avoid margin changes */
-  background-color: #1E90FF;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.img-gen-header.open {
-  max-height: 120px; /* enough for content */
-  opacity: 1;
-  padding: 12px 16px; /* animate vertical padding */
-  margin-bottom: 0; /* keep margin stable */
-}
-
-
-
-.img-gen-header .logo-wrapper {
-  display: flex;
-  gap: 18px;
-  align-items: center;
-}
-
-.img-gen-header .logo-wrapper h1 {
-  font-size: 1.9rem;
-  font-weight: 700;
-}
-
-#heading-of-gen {
-  color: ghostwhite;
-  margin: 0;
-  font-size: 1.25rem;
-  font-weight: 600;
-}
-
-
-.logo-wrapper-and-close {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: white;
-  width: 100%;
-}
-
-
-.close-btn {
-  background: transparent;
-  border: none;
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 0;
-  line-height: 1;
-  transition: background-color 0.2s ease;
-  user-select: none;
-}
-
-.close-btn:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-#generatedCode {
-  width: 100%;
-  bottom: 0;
-  min-height: 250px;
-  max-height: 350px;
-  background-color: #121222;
-  color: #d4d4d4;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 14px;
-  border-radius: 8px;
-  border: 1px solid #44475a;
-  padding: 16px;
-  resize: vertical;
-  overflow: auto;
-  box-shadow: inset 0 0 8px #000000aa;
-}
-
-:root {
-  --color-primary: #5C56E1;
-  --color-primary-dark: #5b21b6;
-  --color-accent: #8B5CF6;
-  --color-card: #FFFFFF;
-  --color-input: #F1F1FF;
-  --color-text: #09090E;
-  --color-placeholder: #5C5A87;
-  --color-border: #D4D4ED;
-  --color-gradient: linear-gradient(135deg, #5C56E1, #8B5CF6);
-}
- body.dark-theme {
-  --color-card: #1E293B;
-  --color-input: #141B2D;
-  --color-text: #F3F4F6;
-  --color-placeholder: #A3B6DC;
-  --color-border: #334155;
-  background: var(--color-card);
-  background-image: radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 35%), radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.15) 0%, transparent 35%), radial-gradient(circle at 50% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 40%);
 }
 
 
 #starfield {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none; /* so clicks pass through */
-  z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* so clicks pass through */
+    z-index: 1000;
 }
 
 .star {
-  position: absolute;
-  background: white;
-  border-radius: 50%;
-  opacity: 0.8;
-  animation: twinkle 2s infinite alternate;
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: twinkle 2s infinite alternate;
 }
 
 @keyframes twinkle {
-  from {opacity: 0.3;}
-  to {opacity: 1;}
+    from {opacity: 0.3;}
+    to {opacity: 1;}
 }
 
 /* Shooting star style */
 .shooting-star {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100px;
-  height: 2px;
-  background: linear-gradient(45deg, white, rgba(255,255,255,0));
-  opacity: 0;
-  pointer-events: none;
-  transform: translateX(0) translateY(0) rotate(45deg);
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  animation-fill-mode: forwards;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(45deg, white, rgba(255,255,255,0));
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(0) translateY(0) rotate(45deg);
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    animation-fill-mode: forwards;
 }
 
 /* Shooting star animation */
 @keyframes shooting {
-  0% {
-    opacity: 1;
-    transform: translateX(0) translateY(0) rotate(45deg);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(500px) translateY(500px) rotate(45deg);
-  }
+    0% {
+        opacity: 1;
+        transform: translateX(0) translateY(0) rotate(45deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(500px) translateY(500px) rotate(45deg);
+    }
 }
 
 /* Fog / clouds near horizon */
 .fog {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 150px;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 20% 70%, rgba(255, 255, 255, 0.15), transparent 40%),
-    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2), transparent 40%),
-    radial-gradient(circle at 80% 60%, rgba(255, 255, 255, 0.12), transparent 40%);
-  filter: blur(20px);
-  z-index: 999;
-  display: none; /* hide initially */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 20% 70%, rgba(255, 255, 255, 0.15), transparent 40%),
+      radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2), transparent 40%),
+      radial-gradient(circle at 80% 60%, rgba(255, 255, 255, 0.12), transparent 40%);
+    filter: blur(20px);
+    z-index: 999;
+    display: none; /* hide initially */
 }
 
 
 
 
 .aurora {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 70px;
-  pointer-events: none;
-  background: linear-gradient(
-    270deg,
-    rgba(0, 191, 255, 0.6),
-    rgba(0, 100, 255, 0.3),
-    rgba(0, 191, 255, 0.6)
-  );
-  background-size: 600% 100%;
-  filter: blur(20px);
-  animation: auroraMove 20s linear infinite;
-  z-index: 50;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    pointer-events: none;
+    background: linear-gradient(
+      270deg,
+      rgba(0, 191, 255, 0.6),
+      rgba(0, 100, 255, 0.3),
+      rgba(0, 191, 255, 0.6)
+    );
+    background-size: 600% 100%;
+    filter: blur(20px);
+    animation: auroraMove 20s linear infinite;
+    z-index: 50;
 }
 .menu-container {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  padding: 60px 20px 20px;
-  background: transparent;
-  transform: translateX(100%);  /* slide from right */
-  opacity: 0;                   /* fade out */
-  pointer-events: none;
-  transition: transform 0.4s ease, opacity 0.4s ease;
-  z-index: 1000;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    padding: 60px 20px 20px;
+    background: transparent;
+    transform: translateX(100%);  /* slide from right */
+    opacity: 0;                   /* fade out */
+    pointer-events: none;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    z-index: 1000;
 }
 .menu-container.active {
-  transform: translateX(0);     /* slide into view */
-  opacity: 1;                   /* fade in */
-  pointer-events: auto;
+    transform: translateX(0);     /* slide into view */
+    opacity: 1;                   /* fade in */
+    pointer-events: auto;
 
-  /* 💡 BACKDROP BLUR + color */
-  background-color: rgba(11, 20, 55, 0.7); /* semi-transparent dark blue */
-  backdrop-filter: blur(8px);             /* glassy blur effect */
+    /* 💡 BACKDROP BLUR + color */
+    background-color: rgba(11, 20, 55, 0.7); /* semi-transparent dark blue */
+    backdrop-filter: blur(8px);             /* glassy blur effect */
 
-  background-image:
-    linear-gradient(rgba(0, 255, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 40px 40px;
-  overflow: hidden;
+    background-image:
+      linear-gradient(rgba(0, 255, 255, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+    overflow: hidden;
 }
 .menu-container.active::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(0, 255, 255, 0.2),
-    transparent
-  );
-  background-size: 200% 100%;
-  animation: currentFlow 4s linear infinite;
-  pointer-events: none;
-  mix-blend-mode: screen;
-  z-index: 1;
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(0, 255, 255, 0.2),
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: currentFlow 4s linear infinite;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    z-index: 1;
 }
 
 @keyframes auroraMove {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
 }
 
 .mist {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 70px;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 25% 40%, rgba(255, 255, 255, 0.12), transparent 60%),
-    radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.08), transparent 50%);
-  filter: blur(25px);
-  animation: mistDrift 40s ease-in-out infinite alternate;
-  z-index: 55;
-  opacity: 0.6;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 25% 40%, rgba(255, 255, 255, 0.12), transparent 60%),
+      radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.08), transparent 50%);
+    filter: blur(25px);
+    animation: mistDrift 40s ease-in-out infinite alternate;
+    z-index: 55;
+    opacity: 0.6;
 }
 
 @keyframes mistDrift {
-  0% { background-position: 0% 0%, 0% 0%; }
-  100% { background-position: 15% 0%, -15% 0%; }
-}
-
-
-
-/* Container layout */
-.work-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-/* Each card */
-.work-card {
-  background: #0f172a;
-  border: 1px solid #2c3e50;
-  border-radius: 10px;
-  overflow: hidden;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 0 10px rgba(0, 245, 212, 0.05);
-}
-
-/* Image on top */
-.work-card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-/* Card content */
-.work-card .content {
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-}
-
-/* Links */
-.work-card a {
-  color: #00f5d4;
-  text-decoration: none;
-  font-size: 1.2rem;
-}
-
-.work-card .link-buttons {
-  display: flex;
-  gap: 1rem;
-}
-
-/* Optional: Add hover effect for desktops (but not required on mobile) */
-@media (hover: hover) {
-  .work-card:hover {
-    box-shadow: 0 0 20px rgba(0, 245, 212, 0.2);
-    transform: translateY(-2px);
-    transition: 0.3s ease;
-  }
-}
-
-.try-it-link {
-  display: inline-block;
-  padding: 0.5rem 1.2rem;
-  margin-top: 1rem;
-  color: #00f5d4;
-  border: 2px solid #00f5d4;
-  border-radius: 6px;
-  font-weight: bold;
-  text-decoration: none;
-  transition: background-color 0.3s, color 0.3s;
-  font-size: 1rem;
-  text-align: center;
-}
-
-/* Optional hover effect for desktop */
-@media (hover: hover) {
-  .try-it-link:hover {
-    background-color: #00f5d4;
-    color: #0f172a;
-  }
-}
-.button-group {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
-  flex-wrap: wrap; /* Allows wrapping on small screens */
-}
-
-.action-link {
-  display: inline-block;
-  padding: 0.5rem 1.2rem;
-  color: #00f5d4;
-  border: 2px solid #00f5d4;
-  border-radius: 6px;
-  font-weight: bold;
-  text-decoration: none;
-  font-size: 1rem;
-  text-align: center;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-/* Optional hover for desktops */
-@media (hover: hover) {
-  .action-link:hover {
-    background-color: #00f5d4;
-    color: #0f172a;
-  }
+    0% { background-position: 0% 0%, 0% 0%; }
+    100% { background-position: 15% 0%, -15% 0%; }
 }
 
 
 input.error {
-    border: 4px solid #ff4d4d;
-    background-color: #330000;
-    color: #ffd6d6;
-    box-shadow: 0 0 10px #ff4d4d88;
-    transition: all 0.3s ease;
+      border: 4px solid #ff4d4d;
+      background-color: #330000;
+      color: #ffd6d6;
+      box-shadow: 0 0 10px #ff4d4d88;
+      transition: all 0.3s ease;
   }
 
   input.error::placeholder {
-    color: #ffaaaa;
+      color: #ffaaaa;
   }
