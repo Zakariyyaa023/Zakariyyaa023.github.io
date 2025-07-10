@@ -1,46 +1,43 @@
-
 var tablinks = document.getElementsByClassName("tab-links");
 var tabcontents = document.getElementsByClassName("tab-contents");
 
 
 function opentab(tabname){
-  for (let tablink of tablinks){
-    tablink.classList.remove("active-link");
-  }
-  for (let tabcontent of tabcontents){
-    tabcontent.classList.remove("active-tab");
-  }
-  event.currentTarget.classList.add("active-link");
-  document.getElementById(tabname).classList.add("active-tab");
+    for (let tablink of tablinks){
+        tablink.classList.remove("active-link");
+    }
+    for (let tabcontent of tabcontents){
+        tabcontent.classList.remove("active-tab");
+    }
+    event.currentTarget.classList.add("active-link");
+    document.getElementById(tabname).classList.add("active-tab");
 }
-
 var sidemenu = document.getElementById("sidemenu");
 
 function openmenu(){
-  sidemenu.style.right = "0";
+    sidemenu.style.right = "0";
 }
 
 function closemenu(){
-  sidemenu.style.right = "-200px";
+    sidemenu.style.right = "-200px";
 }
 
 window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-  const maxScroll = document.body.scrollHeight - window.innerHeight;
-  const scrollPercent = scrollY / maxScroll;
+    const scrollY = window.scrollY;
+    const maxScroll = document.body.scrollHeight - window.innerHeight;
+    const scrollPercent = scrollY / maxScroll;
 
-  const r = Math.floor(100 * (1 - scrollPercent));
-  const g = Math.floor(150 * (1 - scrollPercent));
-  const b = Math.floor(200 * (1 - scrollPercent));
-
-  document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+    const r = Math.floor(100 * (1 - scrollPercent));
+    const g = Math.floor(150 * (1 - scrollPercent));
+    const b = Math.floor(200 * (1 - scrollPercent));
+    document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
 });
 document.addEventListener("DOMContentLoaded", function () {
-  const waitForBotpress = () => {
-    if (window.botpress && window.botpress.init) {
-      document.getElementById("open-chatbot").addEventListener("click", function (e) {
-        e.preventDefault();
-        if (window.botpress && window.botpress.toggle) {
+    const waitForBotpress = () => {
+      if (window.botpress && window.botpress.init) {
+        document.getElementById("open-chatbot").addEventListener("click", function (e) {
+          e.preventDefault();
+          if (window.botpress && window.botpress.toggle) {
           window.botpress.toggle();
         }
       });
@@ -249,5 +246,5 @@ document.addEventListener('DOMContentLoaded', function () {
         messageBox.textContent = "Oops! There was a problem submitting your form.";
         messageBox.style.display = 'block';
       });
-    })
-});
+    });
+  });
