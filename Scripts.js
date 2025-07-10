@@ -128,14 +128,32 @@ function createShootingStar() {
 }
 
 
- const hamburger = document.getElementById('hamburger');
-  const menu = document.getElementById('top-menu');
+const hamburger = document.getElementById('hamburger');
+const menuContainer = document.getElementById('menuContainer');
+const topMenu = document.getElementById('top-menu');
 
 hamburger.addEventListener('click', () => {
-  const isActive = menu.classList.toggle('active');
-  hamburger.setAttribute('aria-expanded', isActive);
-  
+  const isOpen = menuContainer.classList.contains('active');
+
+  if (!isOpen) {
+    // Opening menu
+    menuContainer.classList.add('active');
+    hamburger.setAttribute('aria-expanded', 'true');
+    topMenu.removeAttribute('hidden');
+  } else {
+    // Closing menu with animation
+    menuContainer.classList.remove('active');
+    menuContainer.classList.add('closing');
+    hamburger.setAttribute('aria-expanded', 'false');
+
+    // Wait for animation to finish (match transition duration)
+    setTimeout(() => {
+      menuContainer.classList.remove('closing');
+      topMenu.setAttribute('hidden', '');
+    }, 400); // match CSS transition time (0.4s)
+  }
 });
+
 
 
 
