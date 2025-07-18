@@ -75,21 +75,32 @@
         <!-- Include this in your main HTML file -->
     <section id="Skills">
         <div class="container">
-            <h1 class="sub-title" id="skills" >Practical Skills</h1>
+            <button class="sub-title-button" >Practical Skills</button>
+            <button class="sub-title-button2" >Achievements</button>
             <div class="Skills-list">
-            <div><i class="fab fa-github"></i><h2>GitHub</h2></div>
-            <div><i class="fab fa-java" style="color:#f89820;"></i><h2>Java</h2></div>
-            <div><i class="fab fa-python" style="color:#306998;"></i><h2>Python</h2></div>
-            <div><i class="fab fa-html5"></i><h2>HTML</h2></div>
-            <div><i class="fab fa-css3-alt"></i><h2>CSS</h2></div>
-            <div><i class="fas fa-database"></i><h2>MySQL</h2></div>
-            <div><i class="fas fa-code"></i><h2>REST APIs</h2></div>
-            <div><i class="fab fa-js" style="color:#f7df1e;"></i><h2>JavaScript</h2></div>
-            <div><i class="fas fa-cloud"></i><h2>AWS Services</h2></div>
+                <div><i class="fab fa-github"></i><h2>GitHub</h2></div>
+                <div><i class="fab fa-java" style="color:#f89820;"></i><h2>Java</h2></div>
+                <div><i class="fab fa-python" style="color:#306998;"></i><h2>Python</h2></div>
+                <div><i class="fab fa-html5"></i><h2>HTML</h2></div>
+                <div><i class="fab fa-css3-alt"></i><h2>CSS</h2></div>
+                <div><i class="fas fa-database"></i><h2>MySQL</h2></div>
+                <div><i class="fas fa-code"></i><h2>REST APIs</h2></div>
+                <div><i class="fab fa-js" style="color:#f7df1e;"></i><h2>JavaScript</h2></div>
+                <div><i class="fas fa-cloud"></i><h2>AWS Services</h2></div>
             </div>
+            <div class="carousel-container">
+                <div class="carousel">
+                    <div class="image half-image left-image" id="leftImg"></div>
+                    <div class="image full-image" id="centerImg"></div>
+                    <div class="image half-image right-image" id="rightImg"></div>
+                </div>
+
+                <button class="nav left" onclick="prevImage()">&#10094;</button>
+                <button class="nav right" onclick="nextImage()">&#10095;</button>
+            </div>
+
         </div>
     </section>
-
 
     <!------------------- portfolio --------------------->
     <div id="Portfolio">
@@ -99,7 +110,7 @@
             <div class="work-list">
       <!-- Card 1 -->
             <div class="work-card">
-                <img src="https://framerusercontent.com/images/g0YTRh7uRHpbWQgSZz62bO050.png" alt="AI Chat Bot">
+                <img src="https://framerusercontent.com/assests/g0YTRh7uRHpbWQgSZz62bO050.png" alt="AI Chat Bot">
                 <div class="content">
                 <h3>AI Chat Bot</h3>
                 <p>An AI chatbot that provides personalized info about me, answering questions and engaging in dynamic conversations based on my profile.</p>
@@ -109,7 +120,7 @@
 
       <!-- Card 2 -->
       <div class="work-card">
-        <img src="images/github.jpg" alt="Github User Activity">
+        <img src="assests/github.jpg" alt="Github User Activity">
         <div class="content">
           <h3>Github User Activity</h3>
           <p>A CLI Java tool that fetches and displays a GitHub user's recent activity—commits, pull requests, stars, and more.</p>
@@ -129,7 +140,7 @@
 
       <!-- Card 4 -->
       <div class="work-card">
-        <img src="images/a-picture-of-a-ai-that-is-using-a-designs-on-a-screen-the-back-ground-be-generatating.jpg" alt="AI UI Generator">
+        <img src="assests/a-picture-of-a-ai-that-is-using-a-designs-on-a-screen-the-back-ground-be-generatating.jpg" alt="AI UI Generator">
         <div class="content">
             <h3>AI-Powered UI Design Generator</h3>
             <p>An AI tool that rapidly creates user-friendly interface designs and layouts tailored to your needs.</p>
@@ -145,12 +156,12 @@
     <!-- Card 5 -->
     <div class="hidden-work-list">
             <div class="hidden-work">
-                <img src="images/resume-gen.jpg" alt="Resume Generator">
+                <img src="assests/resume-gen.jpg" alt="Resume Generator">
                     <div class="layer">
                         <h3>Resume Generator</h3>
                         <p>An AI-powered app that automatically creates professional resumes based on your input.</p>
                         <div class="button-group">
-                            <a href="https://resumeai-generator.netlify.app/"class="action-link">Try it out</a>
+                            <a href="https://zakariyyaa023.github.io/Resume-Generator/"class="action-link">Try it out</a>
                             <a href="https://github.com/Zakariyyaa023/Resume-Generator" class="action-link">View GitHub Repo</a>
                         </div>
                     </div>
@@ -174,7 +185,7 @@
                         <a href="https://www.linkedin.com/in/zakariyyaa-davids-0873a5242/"><i class="fab fa-linkedin"></i></a>
                         <a href="https://github.com/Zakariyyaa023"><i class="fab fa-github"></i></a>
                     </div>
-                    <a href="images/Zakariyyaa_Davids_CV.zip" download class="btn btn2">Download Cv(.zip)</a>
+                    <a href="assests/Zakariyyaa_Davids_CV.zip" download class="btn btn2">Download Cv(.zip)</a>
                 </div>
                 <div class="contact-right">
                     <form id="contactForm" action="https://formspree.io/f/movwobqe" method="POST">
