@@ -248,3 +248,61 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   });
+document.querySelector('.sub-title-button2').addEventListener('click', function() {
+    document.querySelector('.Skills-list').style.display = 'none';
+    document.querySelector('.carousel-container').style.display = 'grid';
+
+});
+document.querySelector('.sub-title-button').addEventListener('click', function() {
+    document.querySelector('.carousel-container').style.display = 'none';
+    document.querySelector('.Skills-list').style.display = 'grid';
+});
+const images = [
+        'assests/achievements/quizs/quiz1.jpg',
+        'assests/achievements/quizs/quiz2.jpg',
+        'assests/achievements/practical/Python_for_Datata_Science_AI_and_Development.png',
+        'assests/achievements/practical/Trustworthy_AI_Managing_Bias_Ethics_and_Accountability.png',
+        'assests/achievements/practical/AI_Foundations_Prompt_Engineering_with_ChatGPT.png',
+        'assests/achievements/practical/Managing_Machine_Learning_Projects.png',
+        'assests/achievements/practical/Introduction_to_Responsible_AI.png',
+        'assests/achievements/practical/Human_Factors_in_AI.png',
+        'assests/achievements/practical/Introduction_to_Generative_AI.png',
+        'assests/achievements/practical/Developing_Interpersonal_Skills.png',
+        'assests/achievements/practical/Introduction_to_Artificial_Intelligence_AI.png',
+        'assests/achievements/practical/Artificial_Intelligence_on_Microsoft_Azure.png',
+        'assests/achievements/practical/AI_For_Everyone.png',
+        'assests/achievements/practical/Generative_AI_with_Large_Language_Models.png',
+        'assests/achievements/practical/Building_AI_Powered_Chatbots_Without.png',
+        'assests/achievements/practical/Machine_Learning_Foundations_for_Product.png',
+        'assests/achievements/practical/AI_and_Climate_Change.png',
+];
+
+let current = 0;
+
+const leftImg = document.querySelector(".left-image");
+const centerImg = document.querySelector(".full-image");
+const rightImg = document.querySelector(".right-image");
+
+function updateCarousel() {
+  const prev = (current - 1 + images.length) % images.length;
+  const next = (current + 1) % images.length;
+
+  leftImg.style.backgroundImage = `url(${images[prev]})`;
+  centerImg.style.backgroundImage = `url(${images[current]})`;
+  rightImg.style.backgroundImage = `url(${images[next]})`;
+
+  // Positions and clip-paths handled by CSS classes and transitions
+}
+
+// Call update at start
+updateCarousel();
+
+document.querySelector(".left").addEventListener("click", () => {
+  current = (current - 1 + images.length) % images.length;
+  updateCarousel();
+});
+
+document.querySelector(".right").addEventListener("click", () => {
+  current = (current + 1) % images.length;
+  updateCarousel();
+});
