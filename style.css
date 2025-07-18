@@ -376,7 +376,6 @@ body {
 }
 
 .left-image {
-  /* center half = 300px, side half = 125px */
   left: calc(50% - 300px - 125px); /* 50% - 425px */
   clip-path: inset(0 125px 0 0); /* hide right half of side */
 }
