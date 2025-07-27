@@ -2,11 +2,11 @@ var tablinks = document.getElementsByClassName("tab-links");
 var tabcontents = document.getElementsByClassName("tab-contents");
 
 
-function opentab(tabname){
-    for (let tablink of tablinks){
+function opentab(tabname) {
+    for (let tablink of tablinks) {
         tablink.classList.remove("active-link");
     }
-    for (let tabcontent of tabcontents){
+    for (let tabcontent of tabcontents) {
         tabcontent.classList.remove("active-tab");
     }
     event.currentTarget.classList.add("active-link");
@@ -14,11 +14,11 @@ function opentab(tabname){
 }
 var sidemenu = document.getElementById("sidemenu");
 
-function openmenu(){
+function openmenu() {
     sidemenu.style.right = "0";
 }
 
-function closemenu(){
+function closemenu() {
     sidemenu.style.right = "-200px";
 }
 
@@ -34,52 +34,62 @@ window.addEventListener('scroll', () => {
 });
 document.addEventListener("DOMContentLoaded", function () {
     const waitForBotpress = () => {
-      if (window.botpress && window.botpress.init) {
-        document.getElementById("open-chatbot").addEventListener("click", function (e) {
-          e.preventDefault();
-          if (window.botpress && window.botpress.toggle) {
-          window.botpress.toggle();
+        if (window.botpress && window.botpress.init) {
+            document.getElementById("open-chatbot").addEventListener("click", function (e) {
+                e.preventDefault();
+                if (window.botpress && window.botpress.toggle) {
+                    window.botpress.toggle();
+                }
+            });
+
+            // Fetch clientId and botId from your Netlify function
+            fetch('/.netlify/functions/get-botpress-config')
+                .then(res => res.json())
+                .then(({ clientId, botId }) => {
+                    window.botpress.init({
+                        clientId,
+                        botId,
+                        configuration: {
+                            botName: "Chatfolio",
+                            botDescription: "Welcome! I'm a smart assistant here to help you learn more about Zakariyyaa",
+                            fabImage: "https://files.bpcontent.cloud/2025/05/25/14/20250525145941-FA9G7G2O.jpeg",
+                            color: "#3290d8",
+                            variant: "solid",
+                            themeMode: "dark",
+                            fontFamily: "rubik",
+                            radius: 4,
+                            allowFileUpload: false
+                        }
+                    });
+                })
+                .catch(err => console.error("Failed to get botpress config:", err));
+
+        } else {
+            // Retry after 100ms if botpress is not ready yet
+            setTimeout(waitForBotpress, 100);
         }
-      });
+    };
 
-      // Fetch clientId and botId from your Netlify function
-      fetch('/.netlify/functions/get-botpress-config')
-        .then(res => res.json())
-        .then(({ clientId, botId }) => {
-          window.botpress.init({
-            clientId,
-            botId,
-            configuration: {
-              botName: "Chatfolio",
-              botDescription: "Welcome! I'm a smart assistant here to help you learn more about Zakariyyaa",
-              fabImage: "https://files.bpcontent.cloud/2025/05/25/14/20250525145941-FA9G7G2O.jpeg",
-              color: "#3290d8",
-              variant: "solid",
-              themeMode: "dark",
-              fontFamily: "rubik",
-              radius: 4,
-              allowFileUpload: false
-            }
-          });
-        })
-        .catch(err => console.error("Failed to get botpress config:", err));
+    waitForBotpress();
+});
 
+document.querySelector(".view_more_work").addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const hiddenWork = document.querySelector(".hidden-work-list");
+    const button = e.target;
+
+    // Toggle the visibility class
+    hiddenWork.classList.toggle("active");
+
+    // Change the button text depending on visibility
+    if (hiddenWork.classList.contains("active")) {
+        button.textContent = "View Less";
     } else {
-      // Retry after 100ms if botpress is not ready yet
-      setTimeout(waitForBotpress, 100);
+        button.textContent = "View More";
     }
-  };
-
-  waitForBotpress();
 });
 
-document.querySelector(".btn").addEventListener('click', (e) => {
-  e.preventDefault(); 
-  const hiddenWork = document.querySelector(".hidden-work-list");
-
-  // Toggle the "active" class only
-  hiddenWork.classList.toggle("active");
-});
 
 const starfield = document.getElementById('starfield');
 // const fog = document.querySelector('.fog');
@@ -94,67 +104,83 @@ starfield.classList.remove('hidden');
 
 // Start shooting stars interval immediately
 shootingStarInterval = setInterval(() => {
-  createShootingStar();
+    createShootingStar();
 }, 1500 + Math.random() * 1500);
 
 
 // Keep your existing functions unchanged:
 function createStars(num) {
-  for (let i = 0; i < num; i++) {
-    const star = document.createElement('div');
-    star.classList.add('star');
-    const size = Math.random() * 3 + 1;
-    star.style.width = size + 'px';
-    star.style.height = size + 'px';
-    star.style.top = Math.random() * window.innerHeight + 'px';
-    star.style.left = Math.random() * window.innerWidth + 'px';
-    star.style.animationDuration = (Math.random() * 3 + 1) + 's';
-    starfield.appendChild(star);
-  }
+    for (let i = 0; i < num; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        const size = Math.random() * 3 + 1;
+        star.style.width = size + 'px';
+        star.style.height = size + 'px';
+        star.style.top = Math.random() * window.innerHeight + 'px';
+        star.style.left = Math.random() * window.innerWidth + 'px';
+        star.style.animationDuration = (Math.random() * 3 + 1) + 's';
+        starfield.appendChild(star);
+    }
 }
 
 function createShootingStar() {
-  const shootingStar = document.createElement('div');
-  shootingStar.classList.add('shooting-star');
-  shootingStar.style.top = Math.random() * 200 + 'px';
-  shootingStar.style.left = Math.random() * (window.innerWidth / 2) + 'px';
-  const duration = 1000 + Math.random() * 1000;
-  shootingStar.style.animation = `shooting ${duration}ms linear forwards`;
-  document.body.appendChild(shootingStar);
-  setTimeout(() => shootingStar.remove(), duration);
+    const shootingStar = document.createElement('div');
+    shootingStar.classList.add('shooting-star');
+    shootingStar.style.top = Math.random() * 200 + 'px';
+    shootingStar.style.left = Math.random() * (window.innerWidth / 2) + 'px';
+    const duration = 1000 + Math.random() * 1000;
+    shootingStar.style.animation = `shooting ${duration}ms linear forwards`;
+    document.body.appendChild(shootingStar);
+    setTimeout(() => shootingStar.remove(), duration);
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    const hamburger = document.getElementById('hamburger');
+    const menuContainer = document.getElementById('menuContainer');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const menuLinks = document.querySelectorAll('#top-menu a');
 
-const hamburger = document.getElementById('hamburger');
-const menuContainer = document.getElementById('menuContainer');
-const topMenu = document.getElementById('top-menu');
+    function toggleMenu() {
+        const isActive = menuContainer.classList.contains('active');
 
-hamburger.addEventListener('click', () => {
-  const isOpen = menuContainer.classList.contains('active');
+        if (isActive) {
+            // Close menu
+            hamburger.classList.remove('active');
+            menuContainer.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+        } else {
+            // Open menu
+            hamburger.classList.add('active');
+            menuContainer.classList.add('active');
+            menuOverlay.classList.add('active');
+            hamburger.setAttribute('aria-expanded', 'true');
+        }
+    }
 
-  if (!isOpen) {
-    // Opening menu
-    menuContainer.classList.add('active');
-    hamburger.setAttribute('aria-expanded', 'true');
-    topMenu.removeAttribute('hidden');
-  } else {
-    // Closing menu with animation
-    menuContainer.classList.remove('active');
-    menuContainer.classList.add('closing');
-    hamburger.setAttribute('aria-expanded', 'false');
+    // Toggle menu when hamburger is clicked
+    hamburger.addEventListener('click', toggleMenu);
 
-    // Wait for animation to finish (match transition duration)
-    setTimeout(() => {
-      menuContainer.classList.remove('closing');
-      topMenu.setAttribute('hidden', '');
-    }, 400); // match CSS transition time (0.4s)
-  }
+    // Close menu when overlay is clicked
+    menuOverlay.addEventListener('click', toggleMenu);
+
+    // Close menu when a link is clicked
+    menuLinks.forEach(link => {
+        link.addEventListener('click', function () {
+            toggleMenu();
+        });
+    });
+
+    // Close menu with Escape key
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && menuContainer.classList.contains('active')) {
+            toggleMenu();
+        }
+    });
 });
 
 
-
-
-document.getElementById('contactForm').addEventListener('submit', function(event) {
+document.getElementById('contactForm').addEventListener('submit', function (event) {
     event.preventDefault();
 
     const form = event.target;
@@ -202,107 +228,140 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Remove error class while typing
     emailInput.addEventListener('input', function () {
-      this.classList.remove('error');
+        this.classList.remove('error');
     });
 
     form.addEventListener('submit', function (event) {
-      event.preventDefault();
+        event.preventDefault();
 
-      const formData = new FormData(form);
+        const formData = new FormData(form);
 
-      fetch(form.action, {
-        method: form.method,
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      }).then(response => {
-        if (response.ok) {
-          messageBox.className = 'success';
-          messageBox.textContent = "Email sent successfully!";
-          messageBox.style.display = 'block';
-          emailInput.classList.remove('error');
-          form.reset();
-        } else {
-          response.json().then(data => {
-            messageBox.className = 'error';
-            messageBox.style.display = 'block';
-
-            if (data && data.errors) {
-              messageBox.textContent = data.errors.map(e => e.message).join(", ");
-
-              // If email error, highlight input
-              const hasEmailError = data.errors.some(e => e.message.toLowerCase().includes("email"));
-              if (hasEmailError) {
-                emailInput.classList.add('error');
-              }
-            } else {
-              messageBox.textContent = "Oops! There was a problem submitting your form.";
+        fetch(form.action, {
+            method: form.method,
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
             }
-          });
-        }
-      }).catch(() => {
-        messageBox.className = 'error';
-        messageBox.textContent = "Oops! There was a problem submitting your form.";
-        messageBox.style.display = 'block';
-      });
-    });
-  });
-document.querySelector('.sub-title-button2').addEventListener('click', function() {
-    document.querySelector('.Skills-list').style.display = 'none';
-    document.querySelector('.carousel-container').style.display = 'grid';
+        }).then(response => {
+            if (response.ok) {
+                messageBox.className = 'success';
+                messageBox.textContent = "Email sent successfully!";
+                messageBox.style.display = 'block';
+                emailInput.classList.remove('error');
+                form.reset();
+            } else {
+                response.json().then(data => {
+                    messageBox.className = 'error';
+                    messageBox.style.display = 'block';
 
+                    if (data && data.errors) {
+                        messageBox.textContent = data.errors.map(e => e.message).join(", ");
+
+                        // If email error, highlight input
+                        const hasEmailError = data.errors.some(e => e.message.toLowerCase().includes("email"));
+                        if (hasEmailError) {
+                            emailInput.classList.add('error');
+                        }
+                    } else {
+                        messageBox.textContent = "Oops! There was a problem submitting your form.";
+                    }
+                });
+            }
+        }).catch(() => {
+            messageBox.className = 'error';
+            messageBox.textContent = "Oops! There was a problem submitting your form.";
+            messageBox.style.display = 'block';
+        });
+    });
 });
-document.querySelector('.sub-title-button').addEventListener('click', function() {
-    document.querySelector('.carousel-container').style.display = 'none';
-    document.querySelector('.Skills-list').style.display = 'grid';
-});
+
 const images = [
-        'assests/achievements/quizs/quiz1.jpg',
-        'assests/achievements/quizs/quiz2.jpg',
-        'assests/achievements/practical/Python_for_Datata_Science_AI_and_Development.png',
-        'assests/achievements/practical/Trustworthy_AI_Managing_Bias_Ethics_and_Accountability.png',
-        'assests/achievements/practical/AI_Foundations_Prompt_Engineering_with_ChatGPT.png',
-        'assests/achievements/practical/Managing_Machine_Learning_Projects.png',
-        'assests/achievements/practical/Introduction_to_Responsible_AI.png',
-        'assests/achievements/practical/Human_Factors_in_AI.png',
-        'assests/achievements/practical/Introduction_to_Generative_AI.png',
-        'assests/achievements/practical/Developing_Interpersonal_Skills.png',
-        'assests/achievements/practical/Introduction_to_Artificial_Intelligence_AI.png',
-        'assests/achievements/practical/Artificial_Intelligence_on_Microsoft_Azure.png',
-        'assests/achievements/practical/AI_For_Everyone.png',
-        'assests/achievements/practical/Generative_AI_with_Large_Language_Models.png',
-        'assests/achievements/practical/Building_AI_Powered_Chatbots_Without.png',
-        'assests/achievements/practical/Machine_Learning_Foundations_for_Product.png',
-        'assests/achievements/practical/AI_and_Climate_Change.png',
+    'assets/achievements/practical/AWS/Introduction_to_aws.png',
+    'assets/achievements/verbal/Active_Listening_Enhancing_Communication_Skills.png',
+    'assets/achievements/practical/AI_For_Everyone.png'
+    // '',
+    // '',
+    // '',
+    // '',
+    // '',
+    // '',
+    // 'assets/achievements/practical/Human_Factors_in_AI.png',
+    // '',
+    // 'assets/achievements/practical/Developing_Interpersonal_Skills.png',
+    // 
+    // '',
+    
+    // '',
+    // '',
+    // '',
+    
 ];
 
 let current = 0;
 
+// ⬇️ Minimal addition: dynamically create the image elements
+const carousel = document.querySelector('.carousel');
+carousel.innerHTML = `
+  <div class="image half-image left-image" id="leftImg" title="View Larger"></div>
+  <div class="image full-image" id="centerImg" title="View Larger"></div>
+  <div class="image half-image right-image" id="rightImg" title="View Larger"></div>
+`;
+
+// ⬇️ No changes here
 const leftImg = document.querySelector(".left-image");
 const centerImg = document.querySelector(".full-image");
 const rightImg = document.querySelector(".right-image");
 
 function updateCarousel() {
-  const prev = (current - 1 + images.length) % images.length;
-  const next = (current + 1) % images.length;
+    const prev = (current - 1 + images.length) % images.length;
+    const next = (current + 1) % images.length;
 
-  leftImg.style.backgroundImage = `url(${images[prev]})`;
-  centerImg.style.backgroundImage = `url(${images[current]})`;
-  rightImg.style.backgroundImage = `url(${images[next]})`;
+    leftImg.style.backgroundImage = `url(${images[prev]})`;
+    centerImg.style.backgroundImage = `url(${images[current]})`;
+    rightImg.style.backgroundImage = `url(${images[next]})`;
 
-  // Positions and clip-paths handled by CSS classes and transitions
+    leftImg.setAttribute('data-large', images[prev]);
+    centerImg.setAttribute('data-large', images[current]);
+    rightImg.setAttribute('data-large', images[next]);
 }
 
-// Call update at start
+// ⬇️ No changes here
 updateCarousel();
 
-document.querySelector(".left").addEventListener("click", () => {
-  current = (current - 1 + images.length) % images.length;
-  updateCarousel();
+function prevImage() {
+    current = (current - 1 + images.length) % images.length;
+    updateCarousel();
+}
+
+function nextImage() {
+    current = (current + 1) % images.length;
+    updateCarousel();
+}
+
+const zoomOverlay = document.getElementById('zoomOverlay');
+const zoomedImg = zoomOverlay.querySelector('img');
+
+document.querySelectorAll('.carousel .image').forEach(imgDiv => {
+    imgDiv.addEventListener('click', () => {
+        const largeSrc = imgDiv.dataset.large;
+        if (!largeSrc) return;
+        zoomedImg.src = largeSrc;
+        zoomOverlay.classList.add('active');
+        zoomOverlay.setAttribute('aria-hidden', 'false');
+    });
 });
 
-document.querySelector(".right").addEventListener("click", () => {
-  current = (current + 1) % images.length;
-  updateCarousel();
+zoomOverlay.addEventListener('click', () => {
+    zoomOverlay.classList.remove('active');
+    zoomOverlay.setAttribute('aria-hidden', 'true');
+    zoomedImg.src = '';
+});
+
+// Optional: close on Esc key
+window.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && zoomOverlay.classList.contains('active')) {
+        zoomOverlay.classList.remove('active');
+        zoomOverlay.setAttribute('aria-hidden', 'true');
+        zoomedImg.src = '';
+    }
 });
