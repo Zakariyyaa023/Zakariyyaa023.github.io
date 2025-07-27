@@ -1,207 +1,346 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <title>Personal Portfolio </title>
-        <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <script src="https://cdn.botpress.cloud/webchat/v2.4/inject.js"></script>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Personal Portfolio </title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
 
-    <body>
-        <div class="aurora"></div>
-        <div class="mist"></div>
-        
-        <div id ="Header">
-            <div class="burger-container">
-                <div class="behindcenes">
-                    <button id="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="top-menu">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-        <!-- Navigation Menu -->
-                    <div class="menu-container" id="menuContainer">
-                        <ul id="top-menu" hidden>
-                            <li><a href="#Header">Home</a></li>
-                            <li><a href="#About">About</a></li>
-                            <li><a href="#Skills">Skills</a></li>
-                            <li><a href="#Portfolio">Portfolio</a></li>
-                            <li><a href="#Contact">Contact</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-                <div class="container">
-                    <div class="introduction-text">
-                        <p>Software Developer</p>
-                        <h1>Hi, I'm Zakariyyaa Davids</h1>
-                    </div>
-                </div>
-            </div>
-        
+    
+    <script src="https://cdn.botpress.cloud/webchat/v2.4/inject.js"></script>
+</head>
 
-    <!-- ABOUT ME -->
-        <div id="About">
-            <div class="container">
-                <div class="row">
-                    <div class="about-col-1">
-<!--                    <img src="images/ZAC3..JPG">--></div>    
-                    <div class="about-col-2">
-                        <h1 class="sub-title">About Me</h1>
-                        <p>I am a passionate software developer dedicated to crafting innovative solutions that make a real, meaningful impact. Always eager to expand my skills and stay ahead of emerging technologies, I am committed to continuous learning and growth. My curiosity, adaptability, and problem-solving mindset drive me to contribute positively to any team or organization.Thank you for visiting my webpage, I look forward to the possibility of contributing to your team and making a difference together.</p>
-                        <div class="tab-titles">
-                            <p class="tab-links " onclick="opentab('experiance')">Experiance</p>
-                            <p class="tab-links "onclick="opentab('education')">Education</p>
-                        </div>
-                        <div class="tab-contents" id="experiance">
-                            <ul>
-                                <li><span>School Assignments / Competitions</span><br>Group projects, presentations and hackathons.</li>
-                            </ul>
-                        </div>
-                        <div class="tab-contents" id="education">
-                            <ul>
-                                <li><span>2023-2024 </span><br>Software Developer WeThinkCode_</li>
-                            </ul>
-                        </div>
-                    </div>
+<body>
+    <div class="aurora"></div>
+    <div class="mist"></div>
+    
+    <div id="Header">
+        <div class="burger-container">
+            <div class="behindcenes">
+                <button id="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="top-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <!-- Menu overlay -->
+                <div class="menu-overlay" id="menuOverlay"></div>
+                
+                <!-- Navigation Menu -->
+                <div class="menu-container" id="menuContainer">
+                    <ul id="top-menu">
+                        <li><a href="#Header">Home</a></li>
+                        <li><a href="#About">About</a></li>
+                        <li><a href="#Skills">Skills</a></li>
+                        <li><a href="#Portfolio">Portfolio</a></li>
+                        <li><a href="#Contact">Contact</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
 
-    <!-----------Skills---------------->
-        <!-- Include this in your main HTML file -->
-    <section id="Skills">
+        <!-- This is the introduction part from the first part-->
         <div class="container">
-            <button class="sub-title-button" >Practical Skills</button>
-            <button class="sub-title-button2" >Achievements</button>
-            <div class="Skills-list">
-                <div><i class="fab fa-github"></i><h2>GitHub</h2></div>
-                <div><i class="fab fa-java" style="color:#f89820;"></i><h2>Java</h2></div>
-                <div><i class="fab fa-python" style="color:#306998;"></i><h2>Python</h2></div>
-                <div><i class="fab fa-html5"></i><h2>HTML</h2></div>
-                <div><i class="fab fa-css3-alt"></i><h2>CSS</h2></div>
-                <div><i class="fas fa-database"></i><h2>MySQL</h2></div>
-                <div><i class="fas fa-code"></i><h2>REST APIs</h2></div>
-                <div><i class="fab fa-js" style="color:#f7df1e;"></i><h2>JavaScript</h2></div>
-                <div><i class="fas fa-cloud"></i><h2>AWS Services</h2></div>
+            <div class="introduction-text">
+                <p>Software Developer</p>
+                <h1>Hi, I'm Zakariyyaa Davids</h1>
             </div>
-            <div class="carousel-container">
-                <div class="carousel">
-                    <div class="image half-image left-image" id="leftImg"></div>
-                    <div class="image full-image" id="centerImg"></div>
-                    <div class="image half-image right-image" id="rightImg"></div>
-                </div>
+        </div>
+    </div>
 
-                <button class="nav left" onclick="prevImage()">&#10094;</button>
-                <button class="nav right" onclick="nextImage()">&#10095;</button>
+    <!-- ABOUT ME SECTION -->
+    <section id="About">
+        <div class="row">
+            <div class="about-col-1">
+                <img src="assets/ZAC3.JPG" alt="Profile Photo" />
             </div>
-
+            <div class="about-col-2">
+                <h1 class="typing">About Me</h1>
+                <p class="prompt">As a passionate software developer, I navigate the vast universe of technology to craft innovative solutions that truly make an impact. Always exploring new frontiers and eager to expand my skills, I'm committed to continuous learning and growth. With curiosity as my rocket fuel and problem-solving as my navigation system, I aim to contribute stellar results to any team or mission. Thanks for visiting my cosmic corner — I look forward to launching new ventures together.</p>
+            </div>
         </div>
     </section>
 
-    <!------------------- portfolio --------------------->
+    <div class="edu-exp">
+        <div class="education-and-experience">
+            <h1 class="edu">Education</h1>
+            <h1 class="exp">Experience</h1>
+        </div>
+
+        <div class="timeline">
+            <!-- Left side (Education) -->
+            <div class="timeline-item left">
+                <h4>Matric</h4>
+                <span>Rocklands High School-2016-2020</span>
+                <p>I completed high school with a Senior Certificate.</p>
+            </div>
+
+            <div class="timeline-item right">
+                <h4>All-Rounder Sales Assistant</h4>
+                <span>Takkie Town  — 2021-2022</span>
+                <p>In this role, I assisted customers, handled sales transactions, restocked and packed products, and maintained cleanliness and organization throughout the shop.</p>
+            </div>
+
+            <div class="timeline-item right">
+                <h4>General Worker</h4>
+                <span>De Sammensluttede Vognmænd(DSV)— 2022-2023</span>
+                <p>As a general worker at DSV, I assisted with loading, unloading, sorting, packing, and maintaining a clean and organized warehouse.</p>
+            </div>
+
+            <div class="timeline-item left">
+                <h4>Software Engineer</h4>
+                <span>WeThinkCode_ — 2023-2024</span>
+                <p>I Participated in an intensive software development program, learning coding, problem-solving, and collaboration skills through practical projects and teamwork.</p>
+            </div>
+
+            <div class="timeline-item right">
+                <h4>Capaciti Accerator Candidate</h4>
+                <span>Capaciti — 2025-Present</span>
+                <p>Participated in an intensive AI and data program, developing technical skills alongside soft skills through practical learning and collaboration.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skills -->
+    <section id="Skills">
+        <div class="container">
+            <section>
+                <h2 class="section-title">🛠 Practical Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-card"><i class="fab fa-github"></i><p>GitHub</p></div>
+                    <div class="skill-card"><i class="fab fa-java" style="color:#f89820;"></i><p>Java</p></div>
+                    <div class="skill-card"><i class="fab fa-python" style="color:#306998;"></i><p>Python</p></div>
+                    <div class="skill-card"><i class="fab fa-html5"></i><p>HTML</p></div>
+                    <div class="skill-card"><i class="fab fa-css3-alt"></i><p>CSS</p></div>
+                    <div class="skill-card"><i class="fas fa-database"></i><p>MySQL</p></div>
+                    <div class="skill-card"><i class="fas fa-code"></i><p>REST APIs</p></div>
+                    <div class="skill-card"><i class="fab fa-js" style="color:#f7df1e;"></i><p>JavaScript</p></div>
+                    <div class="skill-card"><i class="fas fa-cloud"></i><p>AWS Services</p></div>
+                </div>
+            </section>
+
+            <!-- Soft Skills grid -->
+            <section>
+                <h2 class="section-title">🧠 Soft Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <i class="fas fa-comments"></i>
+                        <p>Communication</p>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-brain"></i>
+                        <p>Problem Solving</p>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-users"></i>
+                        <p>Team Collaboration</p>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-sync-alt"></i>
+                        <p>Adaptability</p>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-heart"></i>
+                        <p>Emotional Intelligence</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Carousel -->
+            <div class="carousel-section">
+                <h2 class="section-title">🏅 Certifications</h2>
+
+                <div class="carousel-container">
+                    <div class="carousel"></div>
+
+                    <button class="nav left" onclick="prevImage()">&#10094;</button>
+                    <button class="nav right" onclick="nextImage()">&#10095;</button>
+                </div>
+                <div class="button-wrapper">
+                    <a href="certificates.html" class="ring-btn">
+                        <span>See More</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Zoom Overlay picture-->
+    <div id="zoomOverlay" aria-hidden="true">
+        <img src="" alt="Zoomed Image" />
+    </div>
+
+    <!-- Portfolio -->
     <div id="Portfolio">
         <div class="container">
             <h1 class="sub-title">My Work</h1>
-
             <div class="work-list">
-      <!-- Card 1 -->
-            <div class="work-card">
-                <img src="https://framerusercontent.com/images/g0YTRh7uRHpbWQgSZz62bO050.png" alt="AI Chat Bot">
-                <div class="content">
-                <h3>AI Chat Bot</h3>
-                <p>An AI chatbot that provides personalized info about me, answering questions and engaging in dynamic conversations based on my profile.</p>
-               <a href="#" id="open-chatbot" class="try-it-link">Try it out</a>
+                <div class="work-card">
+                    <img src="https://framerusercontent.com/images/g0YTRh7uRHpbWQgSZz62bO050.png" alt="AI Chat Bot">
+                    <div class="content">
+                        <h3>AI Chat Bot</h3>
+                        <p>An AI chatbot that provides personalized info about me, answering questions and engaging in dynamic conversations based on my profile.</p>
+                        <a href="#" id="open-chatbot" class="try-it-link">Try it out</a>
+                    </div>
                 </div>
-            </div>
 
-      <!-- Card 2 -->
-      <div class="work-card">
-        <img src="assests/github.jpg" alt="Github User Activity">
-        <div class="content">
-          <h3>Github User Activity</h3>
-          <p>A CLI Java tool that fetches and displays a GitHub user's recent activity—commits, pull requests, stars, and more.</p>
-          <a href="https://github.com/Zakariyyaa023/GitHub_User_Activity" id="" class="try-it-link">View GitHub Repo</a>
-        </div>
-      </div>
+                <div class="work-card">
+                    <img src="assets/github.jpg" alt="Github User Activity">
+                    <div class="content">
+                        <h3>Github User Activity</h3>
+                        <p>A CLI Java tool that fetches and displays a GitHub user's recent activity—commits, pull requests, stars, and more.</p>
+                        <a href="https://github.com/Zakariyyaa023/GitHub_User_Activity" id="" class="try-it-link">View GitHub Repo</a>
+                    </div>
+                </div>
 
-      <!-- Card 3 -->
-      <div class="work-card">
-        <img src="https://thepythoncode.com/media/articles/alarm-clock-app-using-tkinter-in-python.jpg" alt="Alarm Program">
-        <div class="content">
-          <h3>Alarm Program</h3>
-          <p>A Python CLI alarm clock app that lets you set alarms which trigger sounds at specific times with input validation.</p>
-          <a href="https://github.com/Zakariyyaa023/alarm_clock" id="" class="try-it-link">View GitHub Repo</a>
-        </div>
-      </div>
+                <div class="work-card">
+                    <img src="https://thepythoncode.com/media/articles/alarm-clock-app-using-tkinter-in-python.jpg" alt="Alarm Program">
+                    <div class="content">
+                        <h3>Alarm Program</h3>
+                        <p>A Python CLI alarm clock app that lets you set alarms which trigger sounds at specific times with input validation.</p>
+                        <a href="https://github.com/Zakariyyaa023/alarm_clock" id="" class="try-it-link">View GitHub Repo</a>
+                    </div>
+                </div>
 
-      <!-- Card 4 -->
-      <div class="work-card">
-        <img src="assests/a-picture-of-a-ai-that-is-using-a-designs-on-a-screen-the-back-ground-be-generatating.jpg" alt="AI UI Generator">
-        <div class="content">
-            <h3>AI-Powered UI Design Generator</h3>
-            <p>An AI tool that rapidly creates user-friendly interface designs and layouts tailored to your needs.</p>
-            <div class="button-group">
-                <a href="https://custom-content-gen.netlify.app/" class="action-link">Try it out</a>
-                <a href="https://github.com/Zakariyyaa023/Mockup-gen" class="action-link">View GitHub Repo</a>
-            </div>
-
-
-        </div>
-      </div>
-
-    <!-- Card 5 -->
-    <div class="hidden-work-list">
-            <div class="hidden-work">
-                <img src="assests/resume-gen.jpg" alt="Resume Generator">
-                    <div class="layer">
-                        <h3>Resume Generator</h3>
-                        <p>An AI-powered app that automatically creates professional resumes based on your input.</p>
+                <div class="work-card">
+                    <img src="assets/a-picture-of-a-ai-that-is-using-a-designs-on-a-screen-the-back-ground-be-generatating.jpg" alt="AI UI Generator">
+                    <div class="content">
+                        <h3>AI-Powered UI Design Generator</h3>
+                        <p>An AI tool that rapidly creates user-friendly interface designs and layouts tailored to your needs.</p>
                         <div class="button-group">
-                            <a href="https://zakariyyaa023.github.io/Resume-Generator/"class="action-link">Try it out</a>
-                            <a href="https://github.com/Zakariyyaa023/Resume-Generator" class="action-link">View GitHub Repo</a>
+                            <a href="https://custom-content-gen.netlify.app/" class="action-link">Try it out</a>
+                            <a href="https://github.com/Zakariyyaa023/Mockup-gen" class="action-link">View GitHub Repo</a>
                         </div>
                     </div>
-            </div>
-    </div>
+                </div>
 
-    </div>
-
-    <a href="#" class="btn">See More</a>
-  </div>
-</div>
-
-    <!-------------------- CONTACT ------------------------------>
-        <div id="Contact" class="container">
-            <div class="row">
-                <div class="contact-left">
-                    <h1 class="sub-title">Contact Me</h1>
-                    <p><i class="fas fa-envelope"></i> zakariyyaadavids50@email.com</p>
-                    <p><i class="fas fa-phone" style="font-size:24px;color:#4CAF50;"></i> (+27)78 741 7136</p>
-                    <div class="social-icons">
-                        <a href="https://www.linkedin.com/in/zakariyyaa-davids-0873a5242/"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://github.com/Zakariyyaa023"><i class="fab fa-github"></i></a>
+                <div class="hidden-work-list">
+                    <div class="hidden-work">
+                        <img src="assets/resume-gen.jpg" alt="Resume Generator">
+                        <div class="layer">
+                            <h3>Resume Generator</h3>
+                            <p>An AI-powered app that automatically creates professional resumes based on your input.</p>
+                            <div class="button-group">
+                                <a href="https://zakariyyaa023.github.io/Resume-Generator/"class="action-link">Try it out</a>
+                                <a href="https://github.com/Zakariyyaa023/Resume-Generator" class="action-link">View GitHub Repo</a>
+                            </div>
+                        </div>
                     </div>
-                    <a href="assests/Zakariyyaa_Davids_CV.zip" download class="btn btn2">Download Cv(.zip)</a>
                 </div>
-                <div class="contact-right">
-                    <form id="contactForm" action="https://formspree.io/f/movwobqe" method="POST">
-                        <input type="text" name="Name" placeholder="Your Name" required>
-                        <input type="email" name="email" placeholder="Your Email" required>
-                        <textarea name="Message" rows="9" placeholder="Your Message" required></textarea>
-                        <div id="formMessage"></div>
-                        <button type="submit" class="btn btn2">Submit</button>
-                    </form>
-                </div>
-                
+            </div>
+
+            <div class="button-wrapper-work">
+                <a href="#" class="view_more_work">
+                    <span>See More</span>
+                </a>
             </div>
         </div>
-        <div id="starfield" class="hidden"></div>
-        <div class="fog"></div>
+    </div>
 
-        <script src="Scripts.js"></script>
-    </body>
+    <!-- Contact -->
+    <div id="Contact">
+        <div class="terminal-container">
+            <div class="terminal-header">
+                <div class="terminal-controls">
+                    <button class="control-btn close"></button>
+                    <button class="control-btn minimize"></button>
+                    <button class="control-btn maximize"></button>
+                </div>
+                <div class="terminal-title">CONTACT_MODULE.exe</div>
+            </div>
+            
+            <div class="terminal-content">
+                <div class="terminal-prompt">
+                    <div class="prompt-line">
+                        <span class="prompt-symbol">></span>
+                        <span>Initializing contact interface...</span>
+                    </div>
+                    <div class="prompt-line">
+                        <span class="prompt-symbol">></span>
+                        <span>Connection established with Zakariyyaa Davids</span>
+                    </div>
+                    <div class="prompt-line">
+                        <span class="prompt-symbol">></span>
+                        <span class="typing-animation">Ready for communication</span>
+                    </div>
+                </div>
+
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <div class="info-header">[CONTACT_INFO]</div>
+                        
+                        <div class="info-line">
+                            <a href="mailto:zakariyyaadavids50@email.com">
+                                <i class="fas fa-envelope info-icon"></i>
+                            </a>
+                            <span class="info-text">zakariyyaadavids50@email.com</span>
+                        </div>
+
+                        <div class="info-line">
+                            <a href="tel:+27787417136">
+                                <i class="fas fa-phone info-icon"></i>
+                            </a>
+                            <span class="info-text">(+27) 78 741 7136</span>
+                        </div>
+
+                        <div class="info-line">
+                            <a href="https://www.google.com/maps?q=Cape+Town,+South+Africa" target="_blank">
+                                <i class="fas fa-map-marker-alt info-icon"></i>
+                            </a>
+                            <span class="info-text">Cape Town, South Africa</span>
+                        </div>
+
+                        <div class="social-links">
+                            <a href="https://www.linkedin.com/in/zakariyyaa-davids-0873a5242/" class="social-link" title="LinkedIn">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="https://github.com/Zakariyyaa023" class="social-link" title="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+
+                        <a href="assets/Zakariyyaa_Davids_CV.zip" download class="download-btn">
+                            <i class="fas fa-download"></i> Download CV
+                        </a>
+                    </div>
+
+                    <div class="terminal-form">
+                        <div class="form-header">[EMAIL_COMPOSER]</div>
+                        
+                        <form id="contactForm" action="https://formspree.io/f/movwobqe" method="POST">
+                            <div class="form-group">
+                                <label class="form-label" for="name">NAME:</label>
+                                <input type="text" id="name" name="name" class="form-input" placeholder="Enter your name..." required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="email">EMAIL:</label>
+                                <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email..." required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="message">MESSAGE:</label>
+                                <textarea id="message" name="message" class="form-textarea" placeholder="Type your message here..." required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
+                        </form>
+                        <div id="formMessage"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="starfield" class="hidden"></div>
+    <div class="fog"></div>
+
+    <script src="Scripts.js"></script>
+</body>
 </html>
