@@ -2010,3 +2010,639 @@ input.error {
 input.error::placeholder {
     color: #ffaaaa;
 }
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS & MOBILE-FIRST STYLES
+   ============================================ */
+
+/* Extra small devices (phones, 320px and up) */
+@media (max-width: 480px) {
+    .container {
+        padding: 10px 5%;
+        gap: 20px;
+    }
+
+    /* Navigation */
+    .menu-container {
+        width: 100%;
+        right: -100%;
+    }
+
+    #hamburger {
+        top: 10px;
+        right: 15px;
+        width: 30px;
+        height: 25px;
+    }
+
+    /* Introduction text */
+    .introduction-text {
+        margin-top: 10%;
+        font-size: 18px;
+        text-align: center;
+        padding: 0 10px;
+    }
+
+    .introduction-text h1 {
+        font-size: 36px;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .introduction-text p {
+        font-size: 22px;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    /* About section */
+    .about-col-1 img {
+        width: 250px;
+        height: 250px;
+    }
+
+    .about-col-2 {
+        padding: 20px;
+    }
+
+    .about-col-2 h1 {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .about-col-2 p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    /* Education and Experience */
+    .education-and-experience {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .education-and-experience h1 {
+        font-size: 1.4em;
+    }
+
+    /* Skills section */
+    #Skills {
+        font-size: 2rem;
+        padding: 20px 5%;
+        margin: 20px 10px;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 15px;
+    }
+
+    .skill-card {
+        padding: 15px 8px;
+    }
+
+    .skill-card i {
+        font-size: 2rem;
+    }
+
+    .skill-card p {
+        font-size: 0.9rem;
+    }
+
+    /* Carousel */
+    .carousel {
+        padding: 0 20px;
+        gap: 8px;
+    }
+
+    .half-image {
+        width: 80px;
+        height: 120px;
+    }
+
+    .full-image {
+        width: 180px;
+        height: 140px;
+    }
+
+    .nav {
+        font-size: 1.8rem;
+        padding: 8px 12px;
+    }
+
+    .nav.left {
+        left: 8px;
+    }
+
+    .nav.right {
+        right: 8px;
+    }
+
+    /* Portfolio section */
+    #Portfolio {
+        padding: 2rem 1rem;
+    }
+
+    #Portfolio .sub-title {
+        font-size: 2rem;
+    }
+
+    .work-list {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .work-card .content {
+        padding: 1rem;
+    }
+
+    .work-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .work-card p {
+        font-size: 0.9rem;
+    }
+
+    .button-group {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .button-group .action-link {
+        min-width: auto;
+    }
+
+    /* Contact section */
+    #Contact {
+        padding: 2rem 1rem;
+    }
+
+    .terminal-content {
+        padding: 1rem;
+    }
+
+    .contact-grid {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .contact-info,
+    .terminal-form {
+        padding: 1rem;
+    }
+
+    .info-header,
+    .form-header {
+        font-size: 1rem;
+    }
+
+    .social-link {
+        font-size: 20px;
+        margin-right: 0.8rem;
+    }
+
+    /* Buttons */
+    .ring-btn,
+    .view_more_work {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+
+    #formMessage {
+        font-size: 1.5rem;
+    }
+}
+
+/* Small devices (landscape phones, 481px and up) */
+@media (min-width: 481px) and (max-width: 768px) {
+    .container {
+        padding: 10px 8%;
+        gap: 25px;
+    }
+
+    /* Introduction text */
+    .introduction-text {
+        margin-top: 15%;
+        font-size: 24px;
+    }
+
+    .introduction-text h1 {
+        font-size: 48px;
+        margin-top: 30px;
+    }
+
+    .introduction-text p {
+        font-size: 28px;
+        margin-top: 30px;
+    }
+
+    /* About section */
+    .about-col-1 img {
+        width: 300px;
+        height: 300px;
+    }
+
+    .about-col-2 h1 {
+        font-size: 2.2rem;
+    }
+
+    /* Education and Experience */
+    .education-and-experience {
+        gap: 60px;
+    }
+
+    .education-and-experience h1 {
+        font-size: 1.6em;
+    }
+
+    /* Skills */
+    .skills-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 18px;
+    }
+
+    /* Carousel */
+    .half-image {
+        width: 120px;
+        height: 160px;
+    }
+
+    .full-image {
+        width: 250px;
+        height: 180px;
+    }
+
+    /* Portfolio */
+    .work-list {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+    }
+}
+
+/* Medium devices (tablets, 769px and up) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        padding: 10px 8%;
+    }
+
+    /* Introduction text adjustments */
+    .introduction-text h1 {
+        font-size: 56px;
+    }
+
+    .introduction-text p {
+        font-size: 32px;
+    }
+
+    /* About section */
+    .row {
+        gap: 30px;
+    }
+
+    .about-col-1 {
+        flex-basis: 40%;
+    }
+
+    .about-col-2 {
+        flex-basis: 55%;
+    }
+
+    /* Skills */
+    .skills-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 20px;
+    }
+
+    /* Portfolio */
+    .work-list {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    /* Contact */
+    .contact-grid {
+        gap: 1.5rem;
+    }
+}
+
+/* Large devices (desktops, 1025px and up) */
+@media (min-width: 1025px) and (max-width: 1440px) {
+    .container {
+        padding: 10px 10%;
+    }
+
+    /* Skills grid optimization */
+    .skills-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 24px;
+    }
+
+    /* Portfolio grid */
+    .work-list {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2.5rem;
+    }
+
+    /* Carousel optimization */
+    .half-image {
+        width: 200px;
+        height: 350px;
+    }
+
+    .full-image {
+        width: 400px;
+        height: 350px;
+    }
+}
+
+/* Extra large devices (large desktops, 1441px and up) */
+@media (min-width: 1441px) {
+    .container {
+        max-width: 1600px;
+        margin: 0 auto;
+        padding: 10px 5%;
+    }
+
+    /* Introduction text for large screens */
+    .introduction-text h1 {
+        font-size: 84px;
+    }
+
+    .introduction-text p {
+        font-size: 44px;
+    }
+
+    /* About section for large screens */
+    .about-col-1 img {
+        width: 400px;
+        height: 400px;
+    }
+
+    .about-col-2 h1 {
+        font-size: 3.2rem;
+    }
+
+    .about-col-2 p {
+        font-size: 1.2rem;
+        max-width: 1000px;
+    }
+
+    /* Skills for large screens */
+    .skills-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 30px;
+    }
+
+    .skill-card i {
+        font-size: 3.5rem;
+    }
+
+    .skill-card p {
+        font-size: 1.2rem;
+    }
+
+    /* Portfolio for large screens */
+    .work-list {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 3rem;
+    }
+
+    /* Contact for large screens */
+    .terminal-container {
+        max-width: 1400px;
+    }
+}
+
+/* ============================================
+   LANDSCAPE ORIENTATION FIXES
+   ============================================ */
+
+@media (max-height: 500px) and (orientation: landscape) {
+    .introduction-text {
+        margin-top: 5%;
+    }
+
+    .introduction-text h1 {
+        font-size: 32px;
+        margin-top: 15px;
+    }
+
+    .introduction-text p {
+        font-size: 20px;
+        margin-top: 15px;
+    }
+
+    .container {
+        gap: 15px;
+    }
+
+    #Skills {
+        font-size: 1.8rem;
+        padding: 20px 5%;
+        margin: 15px 20px;
+    }
+}
+
+/* ============================================
+   TOUCH DEVICE OPTIMIZATIONS
+   ============================================ */
+
+@media (hover: none) and (pointer: coarse) {
+    /* Remove hover effects on touch devices */
+    .skill-card:hover {
+        transform: none;
+        box-shadow: 0 0 12px #45a29e66;
+    }
+
+    .work-card:hover {
+        transform: none;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Increase touch targets */
+    .nav {
+        padding: 12px 20px;
+        font-size: 2rem;
+    }
+
+    #hamburger {
+        width: 40px;
+        height: 35px;
+    }
+
+    #hamburger span {
+        height: 5px;
+    }
+
+    /* Larger social media icons for touch */
+    .social-link {
+        font-size: 28px;
+        margin-right: 1.2rem;
+    }
+
+    /* Better touch targets for buttons */
+    .ring-btn,
+    .view_more_work,
+    .try-it-link,
+    .action-link {
+        min-height: 48px;
+        padding: 14px 20px;
+    }
+}
+
+/* ============================================
+   HIGH DPI / RETINA DISPLAY OPTIMIZATIONS
+   ============================================ */
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* Optimize text rendering for high DPI displays */
+    body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Sharper borders and shadows */
+    .skill-card,
+    .work-card,
+    .terminal-container {
+        border-width: 0.5px;
+    }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+    /* Hide interactive elements */
+    #hamburger,
+    .menu-container,
+    .menu-overlay,
+    .nav,
+    #rocket,
+    #starfield,
+    .aurora,
+    .mist,
+    .fog {
+        display: none !important;
+    }
+
+    /* Optimize colors for print */
+    body {
+        background: white !important;
+        color: black !important;
+    }
+
+    .container {
+        padding: 0;
+    }
+
+    /* Ensure readability */
+    .about-col-2,
+    .skill-card,
+    .work-card,
+    .terminal-container {
+        background: white !important;
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+        color: black !important;
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY IMPROVEMENTS
+   ============================================ */
+
+/* Focus states for keyboard navigation */
+@media (prefers-reduced-motion: no-preference) {
+    *:focus {
+        outline: 2px solid #75d6ff;
+        outline-offset: 2px;
+    }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .skill-card,
+    .work-card,
+    .terminal-container {
+        border-width: 2px;
+        border-color: currentColor;
+    }
+
+    .introduction-text h1,
+    .about-col-2 h1,
+    #Skills,
+    #Portfolio .sub-title {
+        text-shadow: none;
+        font-weight: 900;
+    }
+}
+
+/* ============================================
+   COMMON UTILITY CLASSES FOR RESPONSIVE DESIGN
+   ============================================ */
+
+.hidden-mobile {
+    display: block;
+}
+
+.hidden-desktop {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .hidden-mobile {
+        display: none;
+    }
+
+    .hidden-desktop {
+        display: block;
+    }
+}
+
+/* Responsive text utilities */
+.text-responsive {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+.heading-responsive {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+}
+
+/* Responsive spacing utilities */
+.spacing-responsive {
+    padding: clamp(1rem, 3vw, 2rem);
+    margin: clamp(0.5rem, 2vw, 1.5rem) 0;
+}
+
+/* Container query support (for modern browsers) */
+@supports (container-type: inline-size) {
+    .container {
+        container-type: inline-size;
+    }
+
+    @container (max-width: 600px) {
+        .work-list {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @container (min-width: 900px) {
+        .work-list {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+}
