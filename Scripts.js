@@ -76,19 +76,22 @@ document.addEventListener("DOMContentLoaded", function () {
 document.querySelector(".view_more_work").addEventListener('click', (e) => {
     e.preventDefault();
 
-    const hiddenWork = document.querySelector(".hidden-work-list");
+    const hiddenWorks = document.querySelectorAll(".hidden-work-list");
     const button = e.target;
 
-    // Toggle the visibility class
-    hiddenWork.classList.toggle("active");
+    // Toggle the "active" class for each hidden section
+    hiddenWorks.forEach((hiddenWork) => {
+        hiddenWork.classList.toggle("active");
+    });
 
-    // Change the button text depending on visibility
-    if (hiddenWork.classList.contains("active")) {
+    // Check the first one to determine button state
+    if (hiddenWorks[0].classList.contains("active")) {
         button.textContent = "View Less";
     } else {
         button.textContent = "View More";
     }
 });
+
 
 
 const starfield = document.getElementById('starfield');
@@ -364,4 +367,21 @@ window.addEventListener('keydown', e => {
         zoomOverlay.setAttribute('aria-hidden', 'true');
         zoomedImg.src = '';
     }
+});
+
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    const targetId = this.getAttribute('href');
+    const target = document.querySelector(targetId);
+
+    if (target) {
+      const yOffset = -80; // Adjust for header
+      const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  });
 });
