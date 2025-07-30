@@ -7,7 +7,7 @@
 
 html {
     scroll-behavior: smooth;
-
+    scroll-padding-top: 80px;
 }
 
 body {
@@ -319,7 +319,7 @@ body {
 
 /* ------------------introduction-text--------------------------- */
 .introduction-text {
-    margin-top: 20%;
+    margin-top: 10%;
     font-size: 30px;
     text-align: right;
 
@@ -1374,37 +1374,9 @@ body {
     transition: max-height 1.2s cubic-bezier(0.4, 0, 0.2, 1),
         opacity 0.6s ease 0.3s;
     opacity: 1;
+    display: flex;
 }
 
-.hidden-work {
-    border-radius: 16px;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.hidden-work img {
-    width: 100%;
-    border-radius: 16px;
-    display: block;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    filter: brightness(0.9);
-}
-
-.hidden-work:hover img {
-    transform: scale(1.1);
-    filter: brightness(1.1);
-}
-
-.hidden-work:hover .layer {
-    height: 100%;
-}
-
-.hidden-work:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-}
 
 /* Responsive improvements */
 @media (max-width: 768px) {
